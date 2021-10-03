@@ -1,19 +1,40 @@
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require("cors");
+const user = require("./app/controllers/user.controller.js");
+const app = express();
+const port = 3000
 
-var express = require('express');
-var app = express();
-const { Pool } = require('pg')
+// NOTE: Seta a origem dos requests
+var corsOptions = {
+    origin: "https://localhost:4200"
+}
 
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres',
-  password: '',
-  port: 5432,
+app.use(cors());
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const db = require("./app/models");
+
+db.sequelize.sync()
+
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome to my application." });
 });
-// NOTE: Testa a conexão
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res) 
-  pool.end() 
+
+// NOTE: Caso tenha uma requisição de post na url "/user" os dados são enviados
+// para que um usuário novo seja criado 
+app.post("/user", (req, res) => {
+
+    user.create(req, res);
 });
 
-module.exports = app;
+// TODO: Organizar as rotas por arquivos (pasta routes)
+// require("./app/routes/users.routes");
+
+// NOTE: Seta um "listener" na porta 3000
+app.listen(port, () => {
+    console.log(`App running on port ${port}.`)
+})
