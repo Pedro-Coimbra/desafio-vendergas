@@ -1,11 +1,11 @@
- .example-form {
+ .form {
      min-width: 150px;
      max-width: 500px;
      width: 100%;
      display: block;
  }
 
- .example-full-width {
+ .full-width {
      width: 100%;
  }
 
@@ -13,29 +13,29 @@
      display: table;
  }
 
- .example-label {
+ .label {
      display: table-cell;
      font-size: 14px;
      margin-left: 8px;
      min-width: 120px;
  }
 
- .example-button-row {
+ .button-row {
      display: table-cell;
      width: 490px;
  }
 
- .example-button-row .mat-button-base {
+ .button-row .mat-button-base {
      margin: 8px 8px 8px 0;
  }
 
- .example-flex-container {
+ .flex-container {
      display: flex;
      justify-content: space-between;
      flex-wrap: wrap;
  }
 
- .example-button-container {
+ .button-container {
      display: flex;
      justify-content: center;
      width: 120px;

@@ -4,19 +4,32 @@
         <img height="50" src="../../../assets/logo.c037bd80.svg" class="logo">
     </header> -->
     <br>
-    <form class="example-form">
-        <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Login</mat-label>
-            <input matInput placeholder="Digite o seu usuario" value="">
+    <form #loginForm="ngForm" class="form">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" name="email" [(ngModel)]="user.email" #email="ngModel"
+            placeholder="Digite o seu E-mail" value="" required>
+            <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                <div [hidden]="!email.errors.required">
+                    Esse campo é obrigatório!
+                </div>
+            </div>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="full-width" appearance="fill">
             <mat-label>Senha</mat-label>
-            <textarea matInput placeholder="Digite a sua senha"></textarea>
+            <input matInput type="password" name="senha" [(ngModel)]="user.senha" #senha="ngModel"
+            placeholder="Digite a sua senha" value="" required>
+            <div *ngIf="senha.errors && (senha.dirty || senha.touched)" class="alert alert-danger">
+                <div [hidden]="!senha.errors.required">
+                    Esse campo é obrigatório!
+                </div>
+            </div>
         </mat-form-field>
-        <div class="example-button-row">
-            <button mat-flat-button color="warn">Cadastrar</button>
-            <button mat-flat-button style="float:right" color="primary">Login</button>
+
+        <div class="button-row">
+            <button mat-flat-button color="warn" (click)="goToSignUp()" >Cadastrar</button>
+            <button mat-flat-button style="float:right" (click)="login()" color="primary">Login</button>
         </div>
     </form>
 </div>

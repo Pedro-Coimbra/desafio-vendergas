@@ -6,11 +6,10 @@ const app = express();
 const port = 3000
 
 // NOTE: Seta a origem dos requests
-var corsOptions = {
-    origin: "https://localhost:4200"
-}
-
-app.use(cors());
+var corsOptions = {origin: [
+    "http://localhost:4200"
+  ], credentials: true}
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
@@ -29,6 +28,13 @@ app.get("/", (req, res) => {
 app.post("/user", (req, res) => {
 
     user.create(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/login" os dados são enviados
+// para que as credenciais sejam validadas
+app.post("/login", (req, res) => {
+
+    user.login(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
