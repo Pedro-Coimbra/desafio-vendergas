@@ -12,13 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { CreateCompanyComponent } from './create-company/create-company.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignUpComponent,
+    CreateCompanyComponent,
   ],
   imports: [
     CommonModule,
