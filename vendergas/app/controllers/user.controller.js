@@ -2,7 +2,7 @@ const db = require("../models");
 const User = db.user;
 const Op = db.Sequelize.Op;
 const bcrypt = require("bcrypt");
-
+const jwt = require('jsonwebtoken')
 
 // NOTE: Cria o usuário caso ele esteja de acordo com as validações
 exports.create = (req, res) => {
@@ -81,7 +81,18 @@ exports.login = (req, res) => {
                 }
 
                 if (result) {
-                    return res.status(200).send({ message: "Autenticado com sucesso!" })
+                    // NOTE: Cria o token do usuário
+                    let token = jwt.sign({
+                        nome: data["nome"],
+                        email: data["email"]
+                    }, "segredo", {
+                        expiresIn: "72h"
+                    })
+
+                    return res.status(200).send({
+                        message: "Autenticado com sucesso!",
+                        'token': token
+                    })
                 }
                 return res.status(401).send({ message: "Falha na autenticação" })
             })

@@ -2,8 +2,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require("cors");
 const user = require("./app/controllers/user.controller.js");
+const company = require("./app/controllers/company.controller.js");
 const app = express();
 const port = 3000
+const login = require('./middleware/login')
+const db = require("./app/models");
+
 
 // NOTE: Seta a origem dos requests
 var corsOptions = {origin: [
@@ -15,7 +19,7 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = require("./app/models");
+
 
 db.sequelize.sync()
 
@@ -35,6 +39,13 @@ app.post("/user", (req, res) => {
 app.post("/login", (req, res) => {
 
     user.login(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/company" os dados são enviados
+// para que uma empresa seja cadastrada
+app.post("/company", login, (req, res) => {
+
+    company.create(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
