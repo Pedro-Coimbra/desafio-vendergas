@@ -22,13 +22,13 @@ module.exports = (sequelize, Sequelize, Deferrable) => {
     const Company = sequelize.define("empresas", {
         nomeFantasia: {
             type: Sequelize.STRING,
-            primaryKey: true
         },
         razaoSocial: {
             type: Sequelize.STRING,
         },
         cnpj: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            primaryKey: true
         },
         fk_empresa_usuario_idx: {
             type: Sequelize.STRING,
@@ -48,12 +48,12 @@ module.exports = (sequelize, Sequelize, Deferrable) => {
     // NOTE: Cada empresa possui um usuário
     Company.belongsTo(User, {
         constraint: true,
-        foreignKey: 'email'
+        foreignKey: 'fk_empresa_usuario_idx'
     })
     
     // NOTE: Cada usuário possui várias empresas
     User.hasMany(Company, {
-        foreignKey: 'email'
+        foreignKey: 'fk_empresa_usuario_idx'
     })
 
     return Company;
