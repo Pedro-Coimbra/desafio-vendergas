@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 // NOTE: Define o token do usuário de acordo com o "localStorage"
 const httpOptions = {
     headers: new HttpHeaders({
-      Authorization: localStorage.getItem('access_token') || ""
+        Authorization: localStorage.getItem('access_token') || ""
     })
-  };
+};
 
 @Injectable()
 export class ApiServices {
@@ -22,8 +22,13 @@ export class ApiServices {
     public login(body: Object = {}, path: string): Observable<any> {
 
         return this.http.post(`${environment.root_url}${path}`, body, {
-          withCredentials: true
-      });
+            withCredentials: true
+        });
+    }
+
+    public get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+        console.log(`${environment.root_url}${path}`)
+        return this.http.get(`${environment.root_url}${path}`, httpOptions);
     }
 
 }

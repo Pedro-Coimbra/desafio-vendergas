@@ -15,5 +15,8 @@ export class CompanyService {
     registerCompany(company: Company): Observable<Company> {
         return this.apiServices.set(company, "company")
     }
-
+    // Retorna todas as empresas do usuário atual
+    getAll(): Observable<any[]> {
+        return this.apiServices.get("company/getAll")
+    }
 }

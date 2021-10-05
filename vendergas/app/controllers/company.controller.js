@@ -15,7 +15,7 @@ exports.create = (req, res) => {
             message: "A razão social não pode estar vazio!"
         });
         return;
-    // TODO: Validar o cnpj com uma mascara
+        // TODO: Validar o cnpj com uma mascara
     } else if (!req.body.cnpj) {
         res.status(400).send({
             message: "O CNPJ não pode estar vazio!"
@@ -42,4 +42,23 @@ exports.create = (req, res) => {
                     err.message || "Ocorreu algum erro ao tentar salvar a empresa"
             })
         })
+}
+
+// NOTE: Faz a pesquisa no banco de dados pelas empresas do usuário atual
+exports.getAll = (req, res) => {
+
+    Company.findAll({
+        where: {
+            fk_empresa_usuario_idx: req.user.email
+        }
+    }).then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Ocorreu algum erro ao tentar procurar as empresas"
+        })
+    })
+
 }

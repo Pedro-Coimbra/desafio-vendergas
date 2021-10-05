@@ -48,6 +48,15 @@ app.post("/company", login, (req, res) => {
     company.create(req, res);
 });
 
+// NOTE: Caso tenha uma requisição de post na url "/company/getAll" o usuário
+// é validaddo e caso ele esteja autorizado os dados são enviados para que a
+// pesquisa seja feita
+app.get("/company/getAll", login, (req, res) => {
+    // res.json({ message: "getAll" });
+    console.log("CHEGOU AQUI !")
+    company.getAll(req, res);
+});
+
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");
 
