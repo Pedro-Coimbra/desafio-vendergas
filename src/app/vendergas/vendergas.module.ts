@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { ApiServices, UserService } from "./services";
 import { FormsModule } from "@angular/forms";
@@ -13,9 +14,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CreateCompanyComponent } from './create-company/create-company.component';
-import { ListCompanyComponent } from './list-company/list-company.component';
+import { ListCompanyComponent, DeleteDialog } from './list-company/list-company.component';
 import { MatTableModule } from '@angular/material/table';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -24,6 +26,7 @@ import { EditCompanyComponent } from './edit-company/edit-company.component';
         CreateCompanyComponent,
         ListCompanyComponent,
         EditCompanyComponent,
+        DeleteDialog
     ],
     imports: [
         CommonModule,
@@ -34,7 +37,9 @@ import { EditCompanyComponent } from './edit-company/edit-company.component';
         HttpClientModule,
         MatSnackBarModule,
         MatFormFieldModule,
-        MatTableModule
+        MatTableModule,
+        MatDialogModule,
+        MatButtonToggleModule
     ],
     providers: [
         UserService,

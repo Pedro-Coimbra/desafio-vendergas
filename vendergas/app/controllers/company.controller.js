@@ -54,12 +54,12 @@ exports.getAll = (req, res) => {
     }).then(data => {
         res.send(data);
     })
-    .catch(err => {
-        res.status(500).send({
-            message:
-                err.message || "Ocorreu algum erro ao tentar procurar as empresas"
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procurar as empresas"
+            })
         })
-    })
 
 }
 // NOTE: Faz a pesquisa no banco de dados pelo CNPJ e retorna a empresa
@@ -71,19 +71,19 @@ exports.getOne = (req, res) => {
         }
     }).then(data => {
 
-        if(data.length == 1) {
+        if (data.length == 1) {
 
             res.send(data);
         } else {
             res.send("Ocorreu algum erro ao tentar procura a empresas");
         }
     })
-    .catch(err => {
-        res.status(500).send({
-            message:
-                err.message || "Ocorreu algum erro ao tentar procura a empresas"
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procura a empresas"
+            })
         })
-    })
 
 }
 
@@ -116,18 +116,43 @@ exports.updateOne = (req, res) => {
         }
     }).then(data => {
 
-        if(data.length) {
+        if (data.length) {
             res.send(data);
 
         } else {
             res.send("Ocorreu algum erro ao tentar editar a empresa")
         }
     })
-    .catch(err => {
-        res.status(500).send({
-            message:
-                err.message || "Ocorreu algum erro ao tentar editar a empresa"
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar editar a empresa"
+            })
         })
+
+}
+
+// NOTE: Faz o delete no banco de dados pelo CNPJ
+exports.delete = (req, res) => {
+
+    Company.destroy({
+        where: {
+            cnpj: req.body.cnpj,
+            fk_empresa_usuario_idx: req.user.email
+        }
+    }).then(data => {
+
+        if (data.length == 1) {
+            res.send(data);
+        } else {
+            res.send("Ocorreu algum erro ao tentar procura a empresas");
+        }
     })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procura a empresas"
+            })
+        })
 
 }

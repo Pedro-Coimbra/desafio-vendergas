@@ -67,6 +67,11 @@ app.post("/company/updateOne", login, (req, res) => {
 
     company.updateOne(req, res);
 });
+// NOTE: Exclui uma empresa de acordo com o CNPJ da empresa que foi enviada
+app.post("/company/delete", login, (req, res) => {
+
+    company.delete(req, res);
+});
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");

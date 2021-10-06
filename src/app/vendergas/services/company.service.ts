@@ -27,4 +27,8 @@ export class CompanyService {
     updateCompany(company: Company): Observable<any[]> {
         return this.apiServices.set(company,"company/updateOne")
     }
+    // Exclui uma empresa do usuário atual
+    deleteCompany(cnpj: string): Observable<any[]> {
+        return this.apiServices.set({'cnpj': cnpj},"company/delete")
+    }
 }
