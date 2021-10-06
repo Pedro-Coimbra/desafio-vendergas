@@ -62,3 +62,72 @@ exports.getAll = (req, res) => {
     })
 
 }
+// NOTE: Faz a pesquisa no banco de dados pelo CNPJ e retorna a empresa
+exports.getOne = (req, res) => {
+
+    Company.findAll({
+        where: {
+            cnpj: req.body.cnpj
+        }
+    }).then(data => {
+
+        if(data.length == 1) {
+
+            res.send(data);
+        } else {
+            res.send("Ocorreu algum erro ao tentar procura a empresas");
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Ocorreu algum erro ao tentar procura a empresas"
+        })
+    })
+
+}
+
+// NOTE: Edita a empresa enviada de acordo com o CNPJ dela
+exports.updateOne = (req, res) => {
+    const cnpj = req.body.cnpj
+
+    // NOTE: Valida se os campos foram enviados
+    if (!req.body.nomeFantasia) {
+        res.status(400).send({
+            message: "O nome fantasia não pode estar vazio!"
+        });
+        return;
+    } else if (!req.body.razaoSocial) {
+        res.status(400).send({
+            message: "A razão social não pode estar vazio!"
+        });
+        return;
+        // TODO: Validar o cnpj com uma mascara
+    } else if (!req.body.cnpj) {
+        res.status(400).send({
+            message: "O CNPJ não pode estar vazio!"
+        });
+        return;
+    }
+
+    Company.update(req.body, {
+        where: {
+            cnpj: cnpj
+        }
+    }).then(data => {
+
+        if(data.length) {
+            res.send(data);
+
+        } else {
+            res.send("Ocorreu algum erro ao tentar editar a empresa")
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Ocorreu algum erro ao tentar editar a empresa"
+        })
+    })
+
+}

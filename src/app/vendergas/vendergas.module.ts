@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CreateCompanyComponent } from './create-company/create-company.component';
 import { ListCompanyComponent } from './list-company/list-company.component';
 import { MatTableModule } from '@angular/material/table';
+import { EditCompanyComponent } from './edit-company/edit-company.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
         SignUpComponent,
         CreateCompanyComponent,
         ListCompanyComponent,
+        EditCompanyComponent,
     ],
     imports: [
         CommonModule,

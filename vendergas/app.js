@@ -52,9 +52,20 @@ app.post("/company", login, (req, res) => {
 // é validaddo e caso ele esteja autorizado os dados são enviados para que a
 // pesquisa seja feita
 app.get("/company/getAll", login, (req, res) => {
-    // res.json({ message: "getAll" });
-    console.log("CHEGOU AQUI !")
+
     company.getAll(req, res);
+});
+
+// NOTE: Retorna uma empresa de acordo com o CNPJ da empresa que foi enviada
+app.post("/company/getOne", login, (req, res) => {
+
+    company.getOne(req, res);
+});
+
+// NOTE: Atualiza uma empresa de acordo com o CNPJ da empresa que foi enviada
+app.post("/company/updateOne", login, (req, res) => {
+
+    company.updateOne(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)

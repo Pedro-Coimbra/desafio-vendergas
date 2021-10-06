@@ -27,8 +27,18 @@ export class ApiServices {
     }
 
     public get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-        console.log(`${environment.root_url}${path}`)
+
         return this.http.get(`${environment.root_url}${path}`, httpOptions);
     }
 
+    public getOne(any: any, path: string): Observable<any> {
+
+        return this.http.post(`${environment.root_url}${path}`, any, httpOptions);
+    }
+
+    public put(path: string, body: Object = {}): Observable<any> {
+        return this.http.post(`${environment.root_url}${path}`, body, {
+            withCredentials: true
+        });
+    }
 }

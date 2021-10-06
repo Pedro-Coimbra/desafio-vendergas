@@ -22,7 +22,7 @@
 
         <!-- Coluna com os botões de editar e excluir -->
         <ng-container matColumnDef="actions">
-            <mat-header-cell  *matHeaderCellDef > Ações </mat-header-cell>
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
             <mat-cell *matCellDef="let row" >
                  <button mat-button color="accent" (click)="goToEdit(row)">Editar</button>
                  <button mat-button color="warn" (click)="deleteCompany(row)">Excluir</button>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyService } from "../services";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Company } from "../models";
-import { any } from 'sequelize/types/lib/operators';
 
 @Component({
     selector: 'app-list-company',
@@ -19,6 +18,7 @@ export class ListCompanyComponent implements OnInit {
 
     constructor(
         private companyService: CompanyService,
+        private router: Router,
         private route: ActivatedRoute,
     ) { }
 
@@ -32,9 +32,11 @@ export class ListCompanyComponent implements OnInit {
         );
     }
 
-    // TODO: Implementar o editar empresa.
+    // NOTE: Seta o cnpj da empresa no  localStorage e redireciona a página
+    // para a página de edição
     goToEdit(company: any) {
-
+        localStorage.setItem('current_company_cnpj', company.cnpj);
+        this.router.navigate(['/vendergas/edit-company']);
     }
 
     // TODO: Implementar o deletar empresa.
@@ -45,7 +47,7 @@ export class ListCompanyComponent implements OnInit {
     // NOTE: Pega todas empresas que o usuário criou e adiciona na variavel "companies"
     // para que sejam apresentadas na tabela.
     getAllCompanies(): any {
-        this.companyService.getAll().subscribe(
+        this.companyService.getAllCompanies().subscribe(
             (value) => {
                 this.companies = value
 
