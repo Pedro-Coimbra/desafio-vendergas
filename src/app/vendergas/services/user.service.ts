@@ -16,7 +16,7 @@ export class UserService {
     }
     
     // NOTE: Fazer login
-    loginUser(user: User): Observable<User> {
+    loginUser(user: User): Observable<any> {
         return this.apiServices.login(user, "login")
     }
 }

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     // NOTE: Modelo da tabela de usuário 
-    const User = sequelize.define("usuario", {
+    const User = sequelize.define("usuarios", {
         nome: {
             type: Sequelize.STRING
         },

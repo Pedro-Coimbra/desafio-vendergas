@@ -37,7 +37,10 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.form.valid) {
             this.userService.loginUser(this.user).subscribe(
                 response => {
+                    // NOTE: Define o token do usuário no localstorage
+                    localStorage.setItem('access_token', response.token);
                     this.openSnackBar("Usuário autenticado com sucesso!")
+                    // this.router.navigate(['/vendergas/create-company']);
                 },
                 error => {
                     this.openSnackBar(error.error.message)
