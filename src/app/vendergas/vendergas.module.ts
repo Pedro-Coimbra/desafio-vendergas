@@ -18,6 +18,7 @@ import { ListCompanyComponent, DeleteDialog } from './list-company/list-company.
 import { MatTableModule } from '@angular/material/table';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CreateClientComponent } from './create-client/create-client.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         CreateCompanyComponent,
         ListCompanyComponent,
         EditCompanyComponent,
-        DeleteDialog
+        DeleteDialog,
+        CreateClientComponent
     ],
     imports: [
         CommonModule,

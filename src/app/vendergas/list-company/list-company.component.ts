@@ -38,7 +38,7 @@ export class ListCompanyComponent implements OnInit {
         );
     }
 
-    // NOTE: Seta o cnpj da empresa no  localStorage e redireciona a página
+    // NOTE: Seta o cnpj da empresa no localStorage e redireciona a página
     // para a página de edição
     goToEdit(company: any) {
         localStorage.setItem('current_company_cnpj', company.cnpj);
@@ -57,6 +57,13 @@ export class ListCompanyComponent implements OnInit {
                 console.log(error);
             }
         )
+    }
+
+    // NOTE: Seta o cnpj da empresa no localStorage e redireciona a página
+    // para a página de criação de cliente
+    goToCreateClient(company: any): any {
+        localStorage.setItem('current_company_cnpj', company.cnpj);
+        this.router.navigate(['/vendergas/create-client']);
     }
 
     // NOTE: Aciona o componente do dialog

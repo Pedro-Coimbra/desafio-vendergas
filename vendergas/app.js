@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require("cors");
 const user = require("./app/controllers/user.controller.js");
 const company = require("./app/controllers/company.controller.js");
+const client = require("./app/controllers/client.controller.js");
 const app = express();
 const port = 3000
 const login = require('./middleware/login')
@@ -71,6 +72,14 @@ app.post("/company/updateOne", login, (req, res) => {
 app.post("/company/delete", login, (req, res) => {
 
     company.delete(req, res);
+});
+
+
+// NOTE: Caso tenha uma requisição de post na url "/client" os dados são enviados
+// para que um cliente seja cadastrado
+app.post("/client", login, (req, res) => {
+
+    client.create(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
