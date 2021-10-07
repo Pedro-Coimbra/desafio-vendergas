@@ -51,7 +51,7 @@ app.post("/company", login, (req, res) => {
 
 // NOTE: Caso tenha uma requisição de post na url "/company/getAll" o usuário
 // é validaddo e caso ele esteja autorizado os dados são enviados para que a
-// pesquisa seja feita
+// pesquisa seja de empresas feita
 app.get("/company/getAll", login, (req, res) => {
 
     company.getAll(req, res);
@@ -80,6 +80,14 @@ app.post("/company/delete", login, (req, res) => {
 app.post("/client", login, (req, res) => {
 
     client.create(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/client/getAll" o usuário
+// é validaddo e caso ele esteja autorizado os dados são enviados para que a
+// pesquisa seja de clientes feita
+app.post("/client/getAll", login, (req, res) => {
+
+    client.getAll(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)

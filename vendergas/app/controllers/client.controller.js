@@ -43,3 +43,22 @@ exports.create = (req, res) => {
             })
         })
 }
+
+// NOTE: Faz a pesquisa no banco de dados dos clientes por empresa
+exports.getAll = (req, res) => {
+
+    Client.findAll({
+        where: {
+            fk_empresa_cliente_idx: req.body.cnpj
+        }
+    }).then(data => {
+        res.send(data);
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procurar as empresas"
+            })
+        })
+
+}

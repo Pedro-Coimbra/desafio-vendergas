@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent, SignUpComponent, CreateCompanyComponent, ListCompanyComponent, EditCompanyComponent, CreateClientComponent} from './vendergas';
+import { LoginComponent, SignUpComponent, CreateCompanyComponent, ListCompanyComponent, EditCompanyComponent, CreateClientComponent, ListClientComponent} from './vendergas';
 
 // NOTE: Rotas da aplicação
 const routes: Routes = [
@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'vendergas/create-client',
     component: CreateClientComponent
+  },
+  {
+    path: 'vendergas/list-client',
+    component: ListClientComponent
   }
 
 ];
