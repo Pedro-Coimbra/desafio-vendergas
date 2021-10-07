@@ -90,6 +90,18 @@ app.post("/client/getAll", login, (req, res) => {
     client.getAll(req, res);
 });
 
+// NOTE: Atualiza um cliente de acordo com o email do cliente que foi enviado
+app.post("/client/updateOne", login, (req, res) => {
+
+    client.updateOne(req, res);
+});
+
+// NOTE: Retorna um cliente de acordo com o email do cliente que foi enviada
+app.post("/client/getOne", login, (req, res) => {
+
+    client.getOne(req, res);
+});
+
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");
 

@@ -62,3 +62,73 @@ exports.getAll = (req, res) => {
         })
 
 }
+
+// NOTE: Edita o cliente enviado de acordo com o email dele
+exports.updateOne = (req, res) => {
+
+    // NOTE: Valida se os campos foram enviados
+    if (!req.body.nome) {
+        res.status(400).send({
+            message: "O nome não pode estar vazio!"
+        });
+        return;
+    } else if (!req.body.email) {
+        res.status(400).send({
+            message: "A email não pode estar vazio!"
+        });
+        return;
+        // TODO: Validar o telefone com uma mascara
+    } else if (!req.body.telefone) {
+        res.status(400).send({
+            message: "O telefone não pode estar vazio!"
+        });
+        return;
+    }
+
+
+    Client.update(req.body, {
+        where: {
+            email: req.body.email
+        }
+    }).then(data => {
+
+        if (data.length) {
+            res.send(data);
+
+        } else {
+            res.send("Ocorreu algum erro ao tentar editar a empresa")
+        }
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar editar a empresa"
+            })
+        })
+
+}
+
+// NOTE: Faz a pesquisa no banco de dados pelo email e retorna o cliente
+exports.getOne = (req, res) => {
+
+    Client.findAll({
+        where: {
+            email: req.body.email
+        }
+    }).then(data => {
+
+        if (data.length == 1) {
+
+            res.send(data);
+        } else {
+            res.send("Ocorreu algum erro ao tentar procurar o usuário");
+        }
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procurar o usuário"
+            })
+        })
+
+}

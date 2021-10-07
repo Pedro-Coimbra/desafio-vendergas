@@ -20,5 +20,12 @@ export class ClientService {
     getAllClients(cnpj: any): Observable<any> {
         return this.apiServices.set({'cnpj': cnpj}, "client/getAll" )
     }
-
+    // Edita um cliente
+    updateClient(client: Client): Observable<any[]> {
+        return this.apiServices.set(client,"client/updateOne")
+    }
+    // Retorna um cliente
+    getOneClient(email: string): Observable<any[]> {
+        return this.apiServices.getOne({'email': email},"client/getOne")
+    }
 }

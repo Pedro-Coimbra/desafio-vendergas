@@ -24,7 +24,7 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <mat-cell *matCellDef="let row" >
-                 <button mat-button color="accent" >Editar</button>
+                 <button mat-button (click)="goToEdit(row)" color="accent" >Editar</button>
                  <button mat-button color="warn" >Excluir</button>
             </mat-cell>
         </ng-container>

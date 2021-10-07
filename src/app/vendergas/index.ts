@@ -6,3 +6,4 @@ export * from './list-company';
 export * from './edit-company';
 export * from './create-client';
 export * from './list-client';
+export * from './edit-client';
