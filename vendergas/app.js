@@ -102,6 +102,12 @@ app.post("/client/getOne", login, (req, res) => {
     client.getOne(req, res);
 });
 
+// NOTE: Exclui um cliente de acordo com o email do cliente que foi enviado
+app.post("/client/delete", login, (req, res) => {
+
+    client.delete(req, res);
+});
+
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");
 

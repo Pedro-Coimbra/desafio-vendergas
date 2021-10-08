@@ -132,3 +132,27 @@ exports.getOne = (req, res) => {
         })
 
 }
+
+// NOTE: Faz o delete de um cliente no banco de dados pelo email
+exports.delete = (req, res) => {
+
+    Client.destroy({
+        where: {
+            email: req.body.email
+        }
+    }).then(data => {
+
+        if (data.length == 1) {
+            res.send(data);
+        } else {
+            res.send("Ocorreu algum erro ao tentar deletar o cliente");
+        }
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar deletar o cliente"
+            })
+        })
+
+}

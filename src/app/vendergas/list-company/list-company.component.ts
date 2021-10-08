@@ -5,7 +5,7 @@ import { Company } from "../models";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
-export interface DialogData {
+export interface DialogCompanyData {
     nomeFantasia: string;
 }
 
@@ -68,7 +68,7 @@ export class ListCompanyComponent implements OnInit {
 
     // NOTE: Aciona o componente do dialog
     deleteCompany(company: any): void {
-        const dialogRef = this.dialog.open(DeleteDialog, {
+        const dialogRef = this.dialog.open(DeleteCompanyDialog, {
             width: '250px',
             data: { nomeFantasia: company.nomeFantasia }
         });
@@ -81,14 +81,7 @@ export class ListCompanyComponent implements OnInit {
                 this.companyService.deleteCompany(company.cnpj).subscribe(
                     (value) => {
                         // NOTE: Atualiza os dados da tabela
-                        this.companyService.getAllCompanies().subscribe(
-                            (value) => {
-                                this.companies = value;
-                            },
-                            (error) => {
-                                console.log(error);
-                            }
-                        )
+                        this.getAllCompanies();
                     },
                     (error) => {
                         // TODO: Por algum motivo mesmo deletando tudo corretamente
@@ -107,18 +100,24 @@ export class ListCompanyComponent implements OnInit {
             }
         });
     }
+    // NOTE: Redireciona o usuário para a lista de clientes e adiciona o cnpj
+    // da empresa no localStorage
+    goToListClients(client: any) {
+        localStorage.setItem('current_client_cnpj', client.cnpj);
+        this.router.navigate(['/vendergas/list-client']);
+    }
 }
 
 // NOTE: Componente do dialog de delete
 @Component({
-    selector: 'delete-dialog',
-    templateUrl: 'delete-dialog.html',
+    selector: 'delete-company-dialog',
+    templateUrl: 'delete-company-dialog.html',
 })
-export class DeleteDialog {
+export class DeleteCompanyDialog {
 
     constructor(
-        public dialogRef: MatDialogRef<DeleteDialog>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+        public dialogRef: MatDialogRef<DeleteCompanyDialog>,
+        @Inject(MAT_DIALOG_DATA) public data: DialogCompanyData) { }
 
     onNoClick(): void {
         this.dialogRef.close();

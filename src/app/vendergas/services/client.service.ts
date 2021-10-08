@@ -28,4 +28,8 @@ export class ClientService {
     getOneClient(email: string): Observable<any[]> {
         return this.apiServices.getOne({'email': email},"client/getOne")
     }
+    // Exclui um cliente
+    deleteClient(email: string): Observable<any[]> {
+        return this.apiServices.set({'email': email},"client/delete")
+    }
 }

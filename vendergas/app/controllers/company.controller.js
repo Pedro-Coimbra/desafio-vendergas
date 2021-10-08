@@ -145,13 +145,13 @@ exports.delete = (req, res) => {
         if (data.length == 1) {
             res.send(data);
         } else {
-            res.send("Ocorreu algum erro ao tentar procura a empresas");
+            res.send("Ocorreu algum erro ao tentar deletar a empresas");
         }
     })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ocorreu algum erro ao tentar procura a empresas"
+                    err.message || "Ocorreu algum erro ao tentar deletar a empresas"
             })
         })
 

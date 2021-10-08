@@ -2,6 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ClientService } from "../services";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Client } from "../models";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+
+export interface DialogClientData {
+    nome: string;
+}
+
 
 @Component({
     selector: 'app-list-client',
@@ -17,7 +24,7 @@ export class ListClientComponent implements OnInit {
         private clientService: ClientService,
         private router: Router,
         private route: ActivatedRoute,
-        // public dialog: MatDialog
+        public dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -40,7 +47,7 @@ export class ListClientComponent implements OnInit {
     // NOTE: Pega todos os clientes que estão relacionadas a empresa previamente 
     // selecionada para que sejam apresentados na tabela.
     getAllClients(): any {
-        const cnpj = localStorage.getItem('current_company_cnpj') || ""
+        const cnpj = localStorage.getItem('current_client_cnpj') || ""
         this.clientService.getAllClients(cnpj).subscribe(
             (value) => {
                 this.clients = value
@@ -50,6 +57,53 @@ export class ListClientComponent implements OnInit {
                 console.log(error);
             }
         )
+    }
+
+    // NOTE: Função que aciona o dialog de deleção de cliente
+    deleteClient(client: any): void {
+
+        const dialogRef = this.dialog.open(DeleteClientDialog, {
+            width: '250px',
+            data: { nomeFantasia: client.nomeFantasia }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            // NOTE: Caso o usuário tenha confirmado a deleção, o registro do
+            // cliente é enviado para ser deletado
+            if (result == true) {
+
+                this.clientService.deleteClient(client.email).subscribe(
+                    (value) => {
+                        // NOTE: Atualiza os dados da tabela
+                        this.getAllClients()
+                    },
+                    (error) => {
+                        // TODO: Por algum motivo mesmo deletando tudo corretamente
+                        // ele cai aqui no "error"
+                        // NOTE: Atualiza os dados da tabela
+                        this.getAllClients()
+                    }
+                )
+            }
+        });
+
+    }
+
+}
+
+// NOTE: Componente do dialog de delete
+@Component({
+    selector: 'delete-client-dialog',
+    templateUrl: 'delete-client-dialog.html',
+})
+export class DeleteClientDialog {
+
+    constructor(
+        public dialogRef: MatDialogRef<DeleteClientDialog>,
+        @Inject(MAT_DIALOG_DATA) public data: DialogClientData) { }
+
+    onNoClick(): void {
+        this.dialogRef.close();
     }
 
 }

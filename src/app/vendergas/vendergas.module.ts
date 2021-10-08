@@ -14,12 +14,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CreateCompanyComponent } from './create-company/create-company.component';
-import { ListCompanyComponent, DeleteDialog } from './list-company/list-company.component';
+import { ListCompanyComponent, DeleteCompanyDialog } from './list-company/list-company.component';
 import { MatTableModule } from '@angular/material/table';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CreateClientComponent } from './create-client/create-client.component';
-import { ListClientComponent } from './list-client/list-client.component';
+import { ListClientComponent, DeleteClientDialog } from './list-client/list-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
 
 @NgModule({
@@ -29,10 +29,11 @@ import { EditClientComponent } from './edit-client/edit-client.component';
         CreateCompanyComponent,
         ListCompanyComponent,
         EditCompanyComponent,
-        DeleteDialog,
+        DeleteCompanyDialog,
         CreateClientComponent,
         ListClientComponent,
-        EditClientComponent
+        EditClientComponent,
+        DeleteClientDialog
     ],
     imports: [
         CommonModule,
