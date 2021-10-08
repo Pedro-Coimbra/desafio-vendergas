@@ -24,6 +24,8 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <mat-cell *matCellDef="let row" >
+                 <button mat-button color="primary" (click)="goToListClients(row)">Listar clientes</button>
+                 <button mat-button color="primary" (click)="goToCreateClient(row)">Adicionar cliente</button>
                  <button mat-button color="accent" (click)="goToEdit(row)">Editar</button>
                  <button mat-button color="warn" (click)="deleteCompany(row)">Excluir</button>
             </mat-cell>

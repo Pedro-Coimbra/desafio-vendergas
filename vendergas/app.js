@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require("cors");
 const user = require("./app/controllers/user.controller.js");
 const company = require("./app/controllers/company.controller.js");
+const client = require("./app/controllers/client.controller.js");
 const app = express();
 const port = 3000
 const login = require('./middleware/login')
@@ -50,7 +51,7 @@ app.post("/company", login, (req, res) => {
 
 // NOTE: Caso tenha uma requisição de post na url "/company/getAll" o usuário
 // é validaddo e caso ele esteja autorizado os dados são enviados para que a
-// pesquisa seja feita
+// pesquisa seja de empresas feita
 app.get("/company/getAll", login, (req, res) => {
 
     company.getAll(req, res);
@@ -71,6 +72,40 @@ app.post("/company/updateOne", login, (req, res) => {
 app.post("/company/delete", login, (req, res) => {
 
     company.delete(req, res);
+});
+
+
+// NOTE: Caso tenha uma requisição de post na url "/client" os dados são enviados
+// para que um cliente seja cadastrado
+app.post("/client", login, (req, res) => {
+
+    client.create(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/client/getAll" o usuário
+// é validaddo e caso ele esteja autorizado os dados são enviados para que a
+// pesquisa seja de clientes feita
+app.post("/client/getAll", login, (req, res) => {
+
+    client.getAll(req, res);
+});
+
+// NOTE: Atualiza um cliente de acordo com o email do cliente que foi enviado
+app.post("/client/updateOne", login, (req, res) => {
+
+    client.updateOne(req, res);
+});
+
+// NOTE: Retorna um cliente de acordo com o email do cliente que foi enviada
+app.post("/client/getOne", login, (req, res) => {
+
+    client.getOne(req, res);
+});
+
+// NOTE: Exclui um cliente de acordo com o email do cliente que foi enviado
+app.post("/client/delete", login, (req, res) => {
+
+    client.delete(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
