@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ApiServices, UserService } from "./services";
 import { FormsModule } from "@angular/forms";
@@ -53,7 +54,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
         MatFormFieldModule,
         MatTableModule,
         MatDialogModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        MatIconModule
     ],
     providers: [
         UserService,

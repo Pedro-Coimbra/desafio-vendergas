@@ -19,7 +19,7 @@ export class ListCompanyComponent implements OnInit {
 
 
     companies: Company[];
-    displayedColumns: string[] = ['nomeFantasia', 'razaoSocial', 'cnpj', 'actions'];
+    displayedColumns: string[] = ['nomeFantasia', 'razaoSocial', 'cnpj', 'clients', 'products', 'orders', 'actions'];
 
     constructor(
         private companyService: CompanyService,
