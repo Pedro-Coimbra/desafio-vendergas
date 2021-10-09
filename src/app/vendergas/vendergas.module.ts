@@ -22,7 +22,7 @@ import { CreateClientComponent } from './create-client/create-client.component';
 import { ListClientComponent, DeleteClientDialog } from './list-client/list-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { CreateProductComponent } from './create-product/create-product.component';
-import { ListProductComponent } from './list-product/list-product.component';
+import { ListProductComponent, DeleteProductDialog } from './list-product/list-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
@@ -39,7 +39,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
         DeleteClientDialog,
         CreateProductComponent,
         ListProductComponent,
-        EditProductComponent
+        EditProductComponent,
+        DeleteProductDialog
     ],
     imports: [
         CommonModule,

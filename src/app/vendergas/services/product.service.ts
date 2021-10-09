@@ -26,4 +26,8 @@ export class ProductService {
     updateProduct(product: Product): Observable<any[]> {
         return this.apiServices.set(product, "product/updateOne")
     }
+    // NOTE: Exclui um produto
+    deleteProduct(id: string): Observable<any[]> {
+        return this.apiServices.set({'id': id},"product/delete")
+    }
 }

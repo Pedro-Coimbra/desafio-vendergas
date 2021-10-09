@@ -131,3 +131,27 @@ exports.updateOne = (req, res) => {
         })
 
 }
+
+// NOTE: Faz o delete de um produto no banco de dados pelo id
+exports.delete = (req, res) => {
+
+    Product.destroy({
+        where: {
+            id: req.body.id
+        }
+    }).then(data => {
+
+        if (data.length == 1) {
+            res.send(data);
+        } else {
+            res.send("Ocorreu algum erro ao tentar deletar o produto");
+        }
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar deletar o produto"
+            })
+        })
+
+}

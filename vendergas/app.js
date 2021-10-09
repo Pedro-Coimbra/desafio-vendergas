@@ -136,6 +136,12 @@ app.post("/product/updateOne", login, (req, res) => {
     product.updateOne(req, res);
 });
 
+// NOTE: Exclui um produto de acordo com o id do produto que foi enviado
+app.post("/product/delete", login, (req, res) => {
+
+    product.delete(req, res);
+});
+
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");
 
