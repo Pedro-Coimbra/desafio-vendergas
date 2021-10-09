@@ -43,3 +43,22 @@ exports.create = (req, res) => {
             })
         })
 }
+
+// NOTE: Faz a pesquisa no banco de dados dos produtos por empresa
+exports.getAll = (req, res) => {
+
+    Product.findAll({
+        where: {
+            fk_empresa_produto_idx: req.body.cnpj
+        }
+    }).then(data => {
+        res.send(data);
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procurar os produtos"
+            })
+        })
+
+}

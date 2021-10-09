@@ -102,10 +102,22 @@ export class ListCompanyComponent implements OnInit {
     }
     // NOTE: Redireciona o usuário para a lista de clientes e adiciona o cnpj
     // da empresa no localStorage
-    goToListClients(client: any) {
-        localStorage.setItem('current_client_cnpj', client.cnpj);
+    goToListClients(company: any) {
+        localStorage.setItem('current_client_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/list-client']);
     }
+    // NOTE: Redireciona o usuário para a lista de produtos e adiciona o cnpj
+    // da empresa no localStorage
+    goToListProducts(company: any) {
+        localStorage.setItem('current_product_cnpj', company.cnpj);
+        this.router.navigate(['/vendergas/list-product']);
+    }
+    // NOTE: Redireciona o usuário para a criação de produtos e adiciona o cnpj
+    // da empresa no localStorage
+    goToCreateProduct(company: any){
+        localStorage.setItem('current_product_cnpj', company.cnpj);
+        this.router.navigate(['/vendergas/create-product']);
+    } 
 }
 
 // NOTE: Componente do dialog de delete

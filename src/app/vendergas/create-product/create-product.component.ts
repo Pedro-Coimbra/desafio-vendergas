@@ -28,7 +28,8 @@ export class CreateProductComponent implements OnInit {
     // NOTE: Faz algumas validações e envia os dados do produto para que seja cadastrada.
     createProduct() {
         if (this.createProductForm.form.valid) {
-            this.product.cnpj = localStorage.getItem('current_company_cnpj') || ""
+            this.product.cnpj = localStorage.getItem('current_product_cnpj') || ""
+
             this.productService.registerProduct(this.product).subscribe(
                 response => {
                     this.openSnackBar("Produto criado com sucesso!")

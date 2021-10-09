@@ -14,4 +14,8 @@ export class ProductService {
     registerProduct(product: Product): Observable<Product> {
         return this.apiServices.set(product, "product")
     }
+    // NOTE: Retorna todos os produtos
+    getAllProducts(cnpj: any): Observable<any> {
+        return this.apiServices.set({'cnpj': cnpj}, "product/getAll" )
+    }
 }

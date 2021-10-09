@@ -57,7 +57,7 @@ exports.getAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ocorreu algum erro ao tentar procurar as empresas"
+                    err.message || "Ocorreu algum erro ao tentar procurar os clientes"
             })
         })
 
@@ -96,13 +96,13 @@ exports.updateOne = (req, res) => {
             res.send(data);
 
         } else {
-            res.send("Ocorreu algum erro ao tentar editar a empresa")
+            res.send("Ocorreu algum erro ao tentar editar o cliente")
         }
     })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ocorreu algum erro ao tentar editar a empresa"
+                    err.message || "Ocorreu algum erro ao tentar editar o cliente"
             })
         })
 

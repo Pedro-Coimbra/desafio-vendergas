@@ -84,8 +84,8 @@ app.post("/client", login, (req, res) => {
 });
 
 // NOTE: Caso tenha uma requisição de post na url "/client/getAll" o usuário
-// é validaddo e caso ele esteja autorizado os dados são enviados para que a
-// pesquisa seja de clientes feita
+// é validado e caso ele esteja autorizado os dados são enviados para que a
+// pesquisa de clientes seja feita
 app.post("/client/getAll", login, (req, res) => {
 
     client.getAll(req, res);
@@ -112,8 +112,16 @@ app.post("/client/delete", login, (req, res) => {
 // NOTE: Caso tenha uma requisição de post na url "/product" os dados são enviados
 // para que um produto seja cadastrado
 app.post("/product", login, (req, res) => {
-    console.log(req.body)
+
     product.create(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/product/getAll" o usuário
+// é validado e caso ele esteja autorizado os dados são enviados para que a
+// pesquisa de produtos seja feita
+app.post("/product/getAll", login, (req, res) => {
+
+    product.getAll(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)

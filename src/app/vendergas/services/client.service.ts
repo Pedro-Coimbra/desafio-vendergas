@@ -16,7 +16,7 @@ export class ClientService {
     registerClient(client: Client): Observable<Client> {
         return this.apiServices.set(client, "client")
     }
-    // NOTE: Criar cliente
+    // NOTE: Retorna todos os cliente
     getAllClients(cnpj: any): Observable<any> {
         return this.apiServices.set({'cnpj': cnpj}, "client/getAll" )
     }

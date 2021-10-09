@@ -8,3 +8,4 @@ export * from './create-client';
 export * from './list-client';
 export * from './edit-client';
 export * from './create-product';
+export * from './list-product';
