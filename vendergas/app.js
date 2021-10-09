@@ -124,6 +124,18 @@ app.post("/product/getAll", login, (req, res) => {
     product.getAll(req, res);
 });
 
+// NOTE: Retorna um produto de acordo com o id do produto que foi enviada
+app.post("/product/getOne", login, (req, res) => {
+
+    product.getOne(req, res);
+});
+
+// NOTE: Atualiza um produto de acordo com o id do produto que foi enviado
+app.post("/product/updateOne", login, (req, res) => {
+
+    product.updateOne(req, res);
+});
+
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");
 

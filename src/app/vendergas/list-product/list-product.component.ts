@@ -45,4 +45,10 @@ export class ListProductComponent implements OnInit {
             }
         )
     }
+    // NOTE: Seta o id do produto no localStorage e redireciona a página
+    // para a página de edição
+    goToEdit(product: any) {
+        localStorage.setItem('current_product_id', product.id);
+        this.router.navigate(['/vendergas/edit-product']);
+    }
 }

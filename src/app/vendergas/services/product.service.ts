@@ -16,6 +16,14 @@ export class ProductService {
     }
     // NOTE: Retorna todos os produtos
     getAllProducts(cnpj: any): Observable<any> {
-        return this.apiServices.set({'cnpj': cnpj}, "product/getAll" )
+        return this.apiServices.set({ 'cnpj': cnpj }, "product/getAll")
+    }
+    // NOTE: Retorna um produto
+    getOneProduct(id: string): Observable<any[]> {
+        return this.apiServices.getOne({ 'id': id }, "product/getOne")
+    }
+    // NOTE: Edita um produto
+    updateProduct(product: Product): Observable<any[]> {
+        return this.apiServices.set(product, "product/updateOne")
     }
 }

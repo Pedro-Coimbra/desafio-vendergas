@@ -23,6 +23,7 @@ import { ListClientComponent, DeleteClientDialog } from './list-client/list-clie
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ListProductComponent } from './list-product/list-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { ListProductComponent } from './list-product/list-product.component';
         EditClientComponent,
         DeleteClientDialog,
         CreateProductComponent,
-        ListProductComponent
+        ListProductComponent,
+        EditProductComponent
     ],
     imports: [
         CommonModule,
