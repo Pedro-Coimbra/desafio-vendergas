@@ -4,6 +4,7 @@ const cors = require("cors");
 const user = require("./app/controllers/user.controller.js");
 const company = require("./app/controllers/company.controller.js");
 const client = require("./app/controllers/client.controller.js");
+const product = require("./app/controllers/product.controller.js");
 const app = express();
 const port = 3000
 const login = require('./middleware/login')
@@ -106,6 +107,13 @@ app.post("/client/getOne", login, (req, res) => {
 app.post("/client/delete", login, (req, res) => {
 
     client.delete(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/product" os dados são enviados
+// para que um produto seja cadastrado
+app.post("/product", login, (req, res) => {
+    console.log(req.body)
+    product.create(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)

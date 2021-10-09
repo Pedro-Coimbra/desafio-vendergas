@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { ListClientComponent, DeleteClientDialog } from './list-client/list-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { EditClientComponent } from './edit-client/edit-client.component';
         CreateClientComponent,
         ListClientComponent,
         EditClientComponent,
-        DeleteClientDialog
+        DeleteClientDialog,
+        CreateProductComponent
     ],
     imports: [
         CommonModule,

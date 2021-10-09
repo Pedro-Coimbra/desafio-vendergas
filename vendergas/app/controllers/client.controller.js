@@ -39,7 +39,7 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Ocorreu algum erro ao tentar salvar a empresa"
+                    err.message || "Ocorreu algum erro ao tentar salvar o cliente"
             })
         })
 }
