@@ -51,7 +51,7 @@ exports.addProduct = (req, res) => {
     const orderProduct = {
         quantidade: req.body.quantidade,
         produtoId: parseInt(req.body.produtoId),
-        pedidoNumero: req.body.idPedido
+        pedidoNumero: req.body.pedidoNumero
     }
 
     OrderProduct.create(orderProduct)
@@ -122,6 +122,67 @@ exports.getAllOrdersAndProducts = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Ocorreu algum erro ao tentar procurar os pedidos"
+            })
+        })
+
+}
+
+// NOTE: Faz a pesquisa no banco de dados pelo numero do pedido e retorna o pedido
+// e os produtos relacionados a ele
+exports.getOne = (req, res) => {
+
+    Order.findAll({
+        where: {
+            numero: +req.body.pedidoNumero,
+        },
+        include: [Product]
+    }).then(data => {
+
+        res.send(data);
+
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procurar o pedido"
+            })
+        })
+
+}
+
+// NOTE: Atualiza os dados de um pedido
+exports.updateOne = (req, res) => {
+
+    // NOTE: Valida se os campos foram enviados
+    if (!req.body.observacao) {
+        res.status(400).send({
+            message: "A observação não pode estar vazia!"
+        });
+        return;
+    } else if (!req.body.emailCliente) {
+        res.status(400).send({
+            message: "O cliente não pode estar vazio!"
+        });
+        return;
+    }
+
+    Order.update(req.body, {
+        where: {
+            numero: req.body.pedidoNumero
+        }
+    }).then(data => {
+
+        if (data.length) {
+            res.send(data);
+
+        } else {
+            res.send("Ocorreu algum erro ao tentar editar o cliente")
+        }
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar editar o cliente"
             })
         })
 

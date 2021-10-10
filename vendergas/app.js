@@ -168,6 +168,17 @@ app.post("/order/getAllOrdersAndProducts", login, (req, res) => {
     order.getAllOrdersAndProducts(req, res);
 });
 
+// NOTE: Retorna um pedido de acordo com o id do pedido que foi enviado
+app.post("/order/getOne", login, (req, res) => {
+
+    order.getOne(req, res);
+});
+
+// NOTE: Atualiza um pedido de acordo com o id do pedido que foi enviado
+app.post("/order/updateOne", login, (req, res) => {
+
+    order.updateOne(req, res);
+});
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");

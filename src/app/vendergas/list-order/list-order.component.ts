@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from "../services";
-import { ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { OrderProduct } from "../models";
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -17,6 +17,7 @@ export class ListOrderComponent implements OnInit {
     constructor(
         private orderService: OrderService,
         private route: ActivatedRoute,
+        private router: Router,
     ) { }
 
     ngOnInit(): void {
@@ -55,6 +56,11 @@ export class ListOrderComponent implements OnInit {
                 console.log(error);
             }
         )
+    }
+    // NOTE: Vai para a página de edição de pedidos e adiciona o numero do pedido no "localStorage"
+    goToEdit(order: any) {
+        localStorage.setItem('current_order_number', order.pedidoNumero);
+        this.router.navigate(['/vendergas/edit-order']);
     }
 
 }

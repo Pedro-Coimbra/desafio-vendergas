@@ -12,3 +12,4 @@ export * from './list-product';
 export * from './edit-product';
 export * from './create-order';
 export * from './list-order';
+export * from './edit-order';

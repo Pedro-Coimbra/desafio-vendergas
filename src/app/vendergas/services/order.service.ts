@@ -31,4 +31,14 @@ export class OrderService {
     getAllOrdersAndProducts(cnpj: any): Observable<any> {
         return this.apiServices.set({'cnpj': cnpj}, "order/getAllOrdersAndProducts" )
     }
+
+    // NOTE: Retorna um pedido
+    getOneOrder(pedidoNumero: string): Observable<any[]> {
+        return this.apiServices.getOne({'pedidoNumero': pedidoNumero},"order/getOne")
+    }
+
+    // NOTE: Edita um pedido
+    updateOrder(order: Order): Observable<any[]> {
+        return this.apiServices.set(order,"order/updateOne")
+    }
 }

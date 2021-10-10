@@ -103,7 +103,7 @@ export class CreateOrderComponent implements OnInit {
                     return
                 }
             }
-            this.order.idPedido = this.orderNumber
+            this.order.pedidoNumero = this.orderNumber
             this.orderService.addProductToOrder(this.order).subscribe(
                 response => {
                     // NOTE: Adiciona o produto que foi cadastrado na tabela de produtos do pedido

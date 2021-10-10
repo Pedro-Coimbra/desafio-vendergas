@@ -1,7 +1,7 @@
 export class Order {
 
     constructor(
-        public idPedido?: number,
+        public pedidoNumero?: number,
         public observacao?: string,
         public quantidade?: number,
         public produtoId?: number,
