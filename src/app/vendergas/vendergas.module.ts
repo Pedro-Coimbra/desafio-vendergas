@@ -29,7 +29,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ListProductComponent, DeleteProductDialog } from './list-product/list-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
-import { ListOrderComponent } from './list-order/list-order.component';
+import { ListOrderComponent, DeleteOrderDialog } from './list-order/list-order.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
 
 @NgModule({
@@ -50,7 +50,8 @@ import { EditOrderComponent } from './edit-order/edit-order.component';
         DeleteProductDialog,
         CreateOrderComponent,
         ListOrderComponent,
-        EditOrderComponent
+        EditOrderComponent,
+        DeleteOrderDialog
     ],
     imports: [
         CommonModule,

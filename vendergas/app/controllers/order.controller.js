@@ -187,3 +187,27 @@ exports.updateOne = (req, res) => {
         })
 
 }
+
+// NOTE: Faz o delete de um pedido no banco de dados pelo numero do pedido
+exports.delete = (req, res) => {
+
+    Order.destroy({
+        where: {
+            numero: req.body.pedidoNumero
+        }
+    }).then(data => {
+
+        if (data.length == 1) {
+            res.send(data);
+        } else {
+            res.send("Ocorreu algum erro ao tentar deletar o pedido");
+        }
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar deletar o pedido"
+            })
+        })
+
+}

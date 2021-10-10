@@ -151,9 +151,9 @@ export class CreateOrderComponent implements OnInit {
         )
     }
 
-    // NOTE: Retorna para a página que lista as empresas 
+    // NOTE: Retorna para a página que lista os pedidos 
     goToList() {
-        this.router.navigate(['/vendergas/list-company']);
+        this.router.navigate(['/vendergas/list-order']);
     }
 
     // NOTE: Adiciona um SnackBar na tela que dura 5 segundos

@@ -41,4 +41,8 @@ export class OrderService {
     updateOrder(order: Order): Observable<any[]> {
         return this.apiServices.set(order,"order/updateOne")
     }
+    // NOTE: Exclui um pedido
+    deleteOrder(pedidoNumero: string): Observable<any[]> {
+        return this.apiServices.set({'pedidoNumero': pedidoNumero},"order/delete")
+    }
 }

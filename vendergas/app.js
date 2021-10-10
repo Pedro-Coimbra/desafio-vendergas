@@ -180,6 +180,12 @@ app.post("/order/updateOne", login, (req, res) => {
     order.updateOne(req, res);
 });
 
+// NOTE: Exclui um pedido de acordo com o numero do pedido que foi enviado
+app.post("/order/delete", login, (req, res) => {
+
+    order.delete(req, res);
+});
+
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");
 
