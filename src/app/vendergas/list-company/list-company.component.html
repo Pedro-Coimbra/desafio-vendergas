@@ -20,7 +20,7 @@
             <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
         </ng-container>
 
-        <!-- Coluna com os botões de editar e excluir -->
+        <!-- Coluna com os botões de adicionar e listar clientes -->
         <ng-container matColumnDef="clients">
             <th mat-header-cell *matHeaderCellDef> Clientes </th>
             <td *matCellDef="let row">
@@ -29,7 +29,7 @@
             </td>
         </ng-container>
 
-        <!-- Coluna com os botões de editar e excluir -->
+        <!-- Coluna com os botões de adicionar e listar produtos -->
         <ng-container matColumnDef="products">
             <th mat-header-cell *matHeaderCellDef> Produtos </th>
             <td *matCellDef="let row">
@@ -38,15 +38,15 @@
             </td>
         </ng-container>
 
-        <!-- Coluna com os botões de editar e excluir -->
+        <!-- Coluna com os botões de adicionar e listar pedidos -->
         <ng-container matColumnDef="orders">
             <th mat-header-cell *matHeaderCellDef> Pedidos </th>
             <td *matCellDef="let row">
-                <mat-icon aria-hidden="false" aria-label="Adicionar pedido">add_shopping_cart</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Adicionar pedido" (click)="goToCreateOrder(row)" >add_shopping_cart</mat-icon>
                 <mat-icon aria-hidden="false" aria-label="Listar pedidos">view_list</mat-icon>
             </td>
         </ng-container>
-        <!-- Coluna com os botões de editar e excluir -->
+        <!-- Coluna com os botões de editar e excluir empresas -->
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td *matCellDef="let row">

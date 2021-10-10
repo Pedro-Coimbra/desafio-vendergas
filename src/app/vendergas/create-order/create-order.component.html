@@ -1,0 +1,51 @@
+<div id="" class="contentContainerBordered">
+
+    <br>
+    <form #createOrderForm="ngForm" class="form">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Cliente</mat-label>
+
+            <mat-select name="nomeCliente" #nomeCliente="ngModel" [(ngModel)]="order.clientEmail"
+                placeholder="Selecione o nome do cliente">
+                <mat-option *ngFor="let client of clients" value="{{client.email}}">{{client.nome}}</mat-option>
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Produto</mat-label>
+            <mat-select name="nomeProduto" #nomeProduto="ngModel" [(ngModel)]="order.produtoId"
+                placeholder="Selecione o nome do produto">
+                <mat-option *ngFor="let product of products" value="{{product.id}}">{{product.nome}}</mat-option>
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Observação</mat-label>
+            <input matInput type="text" name="observacao" [(ngModel)]="order.observacao" #observacao="ngModel"
+                placeholder="Digite uma observação para o pedido" value="" required>
+            <div *ngIf="observacao.errors && (observacao.dirty || observacao.touched)" class="alert alert-danger">
+                <div [hidden]="!observacao.errors.required">
+                    Esse campo é obrigatório!
+                </div>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Quantidade</mat-label>
+            <input matInput type="number" name="quantidade" [(ngModel)]="order.quantidade" #quantidade="ngModel"
+                placeholder="Digite o quantidade do produto" value="" required>
+            <div *ngIf="quantidade.errors && (quantidade.dirty || quantidade.touched)" class="alert alert-danger">
+                <div [hidden]="!quantidade.errors.required">
+                    Esse campo é obrigatório!
+                </div>
+            </div>
+        </mat-form-field>
+
+        <div class="button-row">
+            <button mat-flat-button color="warn" (click)="goToList()">Cancelar</button>
+            <button mat-flat-button style="float:right" (click)="createOrder()" color="primary">Cadastrar</button>
+        </div>
+    </form>
+</div>

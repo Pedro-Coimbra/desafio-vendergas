@@ -5,6 +5,7 @@ const user = require("./app/controllers/user.controller.js");
 const company = require("./app/controllers/company.controller.js");
 const client = require("./app/controllers/client.controller.js");
 const product = require("./app/controllers/product.controller.js");
+const order = require("./app/controllers/order.controller.js");
 const app = express();
 const port = 3000
 const login = require('./middleware/login')
@@ -140,6 +141,13 @@ app.post("/product/updateOne", login, (req, res) => {
 app.post("/product/delete", login, (req, res) => {
 
     product.delete(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/order" os dados são enviados
+// para que um produto seja cadastrado
+app.post("/order", login, (req, res) => {
+
+    order.create(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)

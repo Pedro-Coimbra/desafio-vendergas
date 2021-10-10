@@ -10,3 +10,4 @@ export * from './edit-client';
 export * from './create-product';
 export * from './list-product';
 export * from './edit-product';
+export * from './create-order';
