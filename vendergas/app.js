@@ -4,6 +4,8 @@ const cors = require("cors");
 const user = require("./app/controllers/user.controller.js");
 const company = require("./app/controllers/company.controller.js");
 const client = require("./app/controllers/client.controller.js");
+const product = require("./app/controllers/product.controller.js");
+const order = require("./app/controllers/order.controller.js");
 const app = express();
 const port = 3000
 const login = require('./middleware/login')
@@ -83,8 +85,8 @@ app.post("/client", login, (req, res) => {
 });
 
 // NOTE: Caso tenha uma requisição de post na url "/client/getAll" o usuário
-// é validaddo e caso ele esteja autorizado os dados são enviados para que a
-// pesquisa seja de clientes feita
+// é validado e caso ele esteja autorizado os dados são enviados para que a
+// pesquisa de clientes seja feita
 app.post("/client/getAll", login, (req, res) => {
 
     client.getAll(req, res);
@@ -106,6 +108,82 @@ app.post("/client/getOne", login, (req, res) => {
 app.post("/client/delete", login, (req, res) => {
 
     client.delete(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/product" os dados são enviados
+// para que um produto seja cadastrado
+app.post("/product", login, (req, res) => {
+
+    product.create(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/product/getAll" o usuário
+// é validado e caso ele esteja autorizado os dados são enviados para que a
+// pesquisa de produtos seja feita
+app.post("/product/getAll", login, (req, res) => {
+
+    product.getAll(req, res);
+});
+
+// NOTE: Retorna um produto de acordo com o id do produto que foi enviada
+app.post("/product/getOne", login, (req, res) => {
+
+    product.getOne(req, res);
+});
+
+// NOTE: Atualiza um produto de acordo com o id do produto que foi enviado
+app.post("/product/updateOne", login, (req, res) => {
+
+    product.updateOne(req, res);
+});
+
+// NOTE: Exclui um produto de acordo com o id do produto que foi enviado
+app.post("/product/delete", login, (req, res) => {
+
+    product.delete(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/order" os dados são enviados
+// para que um produto seja cadastrado
+app.post("/order", login, (req, res) => {
+
+    order.create(req, res);
+});
+
+// NOTE: Caso tenha uma requisição de post na url "/order" os dados são enviados
+// para que um produto seja cadastrado
+app.post("/order/addProduct", login, (req, res) => {
+
+    order.addProduct(req, res);
+});
+
+// NOTE: Exclui um produto de acordo com o id do produto que foi enviado
+app.post("/order/deleteProduct", login, (req, res) => {
+
+    order.deleteProduct(req, res);
+});
+// NOTE: Retorna todos os pedidos e seus produtos de acordo com o cnpj da empresa enviado
+app.post("/order/getAllOrdersAndProducts", login, (req, res) => {
+
+    order.getAllOrdersAndProducts(req, res);
+});
+
+// NOTE: Retorna um pedido de acordo com o id do pedido que foi enviado
+app.post("/order/getOne", login, (req, res) => {
+
+    order.getOne(req, res);
+});
+
+// NOTE: Atualiza um pedido de acordo com o id do pedido que foi enviado
+app.post("/order/updateOne", login, (req, res) => {
+
+    order.updateOne(req, res);
+});
+
+// NOTE: Exclui um pedido de acordo com o numero do pedido que foi enviado
+app.post("/order/delete", login, (req, res) => {
+
+    order.delete(req, res);
 });
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
