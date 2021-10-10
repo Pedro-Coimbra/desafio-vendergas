@@ -11,8 +11,19 @@ export class OrderService {
     constructor(private apiServices: ApiServices) { }
 
     // NOTE: Cria um produto
-    registerOrder(order: Order): Observable<Order> {
+    registerOrder(order: Order): Observable<any> {
         return this.apiServices.set(order, "order")
     }
+    // NOTE: Adiciona um produto a um pedido
+    addProductToOrder(order: Order): Observable<any> {
+        return this.apiServices.set(order, "order/addProduct")
+    }
 
+    // NOTE: Exclui um produto de um pedido
+    deleteProduct(pedidoNumero: number, produtoId: number): Observable<any[]> {
+        return this.apiServices.set({
+            'pedidoNumero': pedidoNumero,
+            'produtoId': produtoId
+        },"order/deleteProduct")
+    }
 }

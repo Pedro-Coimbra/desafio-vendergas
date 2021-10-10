@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 import { ApiServices, UserService } from "./services";
 import { FormsModule } from "@angular/forms";
@@ -59,7 +61,9 @@ import { CreateOrderComponent } from './create-order/create-order.component';
         MatDialogModule,
         MatButtonToggleModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        MatStepperModule,
+        CdkStepperModule
     ],
     providers: [
         UserService,

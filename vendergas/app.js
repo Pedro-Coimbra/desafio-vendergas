@@ -150,6 +150,19 @@ app.post("/order", login, (req, res) => {
     order.create(req, res);
 });
 
+// NOTE: Caso tenha uma requisição de post na url "/order" os dados são enviados
+// para que um produto seja cadastrado
+app.post("/order/addProduct", login, (req, res) => {
+
+    order.addProduct(req, res);
+});
+
+// NOTE: Exclui um produto de acordo com o id do produto que foi enviado
+app.post("/order/deleteProduct", login, (req, res) => {
+
+    order.deleteProduct(req, res);
+});
+
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");
 
