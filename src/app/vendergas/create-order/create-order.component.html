@@ -8,7 +8,7 @@
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Cliente</mat-label>
 
-                    <mat-select name="nomeCliente" #nomeCliente="ngModel" [(ngModel)]="order.clientEmail"
+                    <mat-select name="nomeCliente" #nomeCliente="ngModel" [(ngModel)]="order.emailCliente"
                         placeholder="Selecione o nome do cliente">
                         <mat-option *ngFor="let client of clients" value="{{client.email}}">{{client.nome}}</mat-option>
                     </mat-select>

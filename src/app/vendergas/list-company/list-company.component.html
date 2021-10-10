@@ -43,7 +43,7 @@
             <th mat-header-cell *matHeaderCellDef> Pedidos </th>
             <td *matCellDef="let row">
                 <mat-icon aria-hidden="false" aria-label="Adicionar pedido" (click)="goToCreateOrder(row)" >add_shopping_cart</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Listar pedidos">view_list</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Listar pedidos" (click)="goToListOrders(row)" >view_list</mat-icon>
             </td>
         </ng-container>
         <!-- Coluna com os botões de editar e excluir empresas -->

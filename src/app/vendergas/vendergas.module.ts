@@ -29,6 +29,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ListProductComponent, DeleteProductDialog } from './list-product/list-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
+import { ListOrderComponent } from './list-order/list-order.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { CreateOrderComponent } from './create-order/create-order.component';
         ListProductComponent,
         EditProductComponent,
         DeleteProductDialog,
-        CreateOrderComponent
+        CreateOrderComponent,
+        ListOrderComponent
     ],
     imports: [
         CommonModule,

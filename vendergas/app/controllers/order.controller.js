@@ -2,6 +2,7 @@ const { product } = require("../models");
 const db = require("../models");
 const Product = db.product;
 const Order = db.order;
+const Client = db.client;
 const OrderProduct = db.orderProduct;
 const Op = db.Sequelize.Op;
 
@@ -15,7 +16,7 @@ exports.create = (req, res) => {
             message: "A observação não pode estar vazia!"
         });
         return;
-    } else if (!req.body.clientEmail) {
+    } else if (!req.body.emailCliente) {
         res.status(400).send({
             message: "O cliente não pode estar vazio!"
         });
@@ -26,7 +27,7 @@ exports.create = (req, res) => {
     const order = {
         observacao: req.body.observacao,
         fk_empresa_pedido_idx: req.body.cnpj,
-        fk_cliente_pedido_idx: req.body.clientEmail,
+        fk_cliente_pedido_idx: req.body.emailCliente,
         fk_empresa_produto_idx: req.body.cnpj
     }
 
@@ -101,6 +102,26 @@ exports.deleteProduct = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Ocorreu algum erro ao tentar deletar o produto do pedido"
+            })
+        })
+
+}
+
+// NOTE: Faz a pesquisa no banco de dados de todos os pedidos e os seus produtos por empresa
+exports.getAllOrdersAndProducts = (req, res) => {
+
+    Order.findAll({
+        where: {
+            fk_empresa_pedido_idx: req.body.cnpj
+        },
+        include: [Product, Client]
+    }).then(data => {
+        res.send(data);
+    })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Ocorreu algum erro ao tentar procurar os pedidos"
             })
         })
 

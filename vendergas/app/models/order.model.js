@@ -1,6 +1,7 @@
 const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
-
+var moment = require('moment'); // require
+moment().format(); 
 // NOTE: inicializa um objeto Sequelize com as credenciais do banco de dados
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
@@ -46,7 +47,14 @@ module.exports = (sequelize, Sequelize, Deferrable) => {
                 key: 'email',
 
             }
-        }
+        },
+        createdAt: {
+            type: Sequelize.DATE,
+            // NOTE: Faz com que retorne a data de criação formatada  
+            get() {
+                return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
+            }
+        },
 
     }, {
         updatedAt: false,

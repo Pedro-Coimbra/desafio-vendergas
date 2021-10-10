@@ -162,6 +162,12 @@ app.post("/order/deleteProduct", login, (req, res) => {
 
     order.deleteProduct(req, res);
 });
+// NOTE: Retorna todos os pedidos e seus produtos de acordo com o cnpj da empresa enviado
+app.post("/order/getAllOrdersAndProducts", login, (req, res) => {
+
+    order.getAllOrdersAndProducts(req, res);
+});
+
 
 // TODO: Organizar as rotas por arquivos (pasta routes)
 // require("./app/routes/users.routes");

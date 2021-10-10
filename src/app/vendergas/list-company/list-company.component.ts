@@ -112,6 +112,12 @@ export class ListCompanyComponent implements OnInit {
         localStorage.setItem('current_product_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/list-product']);
     }
+    // NOTE: Redireciona o usuário para a lista de pedidos e adiciona o cnpj
+    // da empresa no localStorage
+    goToListOrders(company: any) {
+        localStorage.setItem('current_order_cnpj', company.cnpj);
+        this.router.navigate(['/vendergas/list-order']);
+    }
     // NOTE: Redireciona o usuário para a criação de produtos e adiciona o cnpj
     // da empresa no localStorage
     goToCreateProduct(company: any){

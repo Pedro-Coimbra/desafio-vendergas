@@ -26,4 +26,9 @@ export class OrderService {
             'produtoId': produtoId
         },"order/deleteProduct")
     }
+
+    // NOTE: Retorna todos os pedidos com seus produtos
+    getAllOrdersAndProducts(cnpj: any): Observable<any> {
+        return this.apiServices.set({'cnpj': cnpj}, "order/getAllOrdersAndProducts" )
+    }
 }

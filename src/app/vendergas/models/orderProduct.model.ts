@@ -5,8 +5,11 @@ export class OrderProduct {
         public observacao?: string,
         public quantidade?: number,
         public produtoId?: number,
-        public clientEmail?: number,
+        public emailCliente?: string,
+        public nomeCliente?: string,
         public nomeProduto?: string,
+        public produtos?: any[],
+        public dataPedido?: Date,
         public cnpj?: string) {
     }
 }

@@ -5,7 +5,7 @@ export class Order {
         public observacao?: string,
         public quantidade?: number,
         public produtoId?: number,
-        public clientEmail?: number,
+        public emailCliente?: string,
         public cnpj?: string) {
     }
 }
