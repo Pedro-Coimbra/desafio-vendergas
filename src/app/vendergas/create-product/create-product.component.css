@@ -40,6 +40,12 @@ section {
     justify-content: center;
     width: 120px;
 }
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .contentContainerBordered {
 

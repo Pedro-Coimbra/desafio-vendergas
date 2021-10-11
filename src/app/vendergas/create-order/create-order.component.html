@@ -3,6 +3,12 @@
         <br>
         <!-- Primeiro passo -->
         <mat-step [stepControl]="createOrderForm">
+            <header class="header">
+                <h1>
+                    Cadastrar pedido - {{nomeFantasia}}
+                </h1>
+            </header>
+            <br>
             <form #createOrderForm="ngForm" class="form">
                 <ng-template matStepLabel>Criar pedido</ng-template>
                 <mat-form-field class="full-width" appearance="fill">
@@ -37,6 +43,11 @@
         <!-- Segundo passo -->
         <mat-step [stepControl]="createOrderProductForm">
             <br>
+            <header class="header">
+                <h1>
+                    Cadastrar pedido - {{nomeFantasia}}
+                </h1>
+            </header>
             <br>
             <form #createOrderProductForm="ngForm" class="form">
                 <ng-template matStepLabel>Adicionar produtos</ng-template>
@@ -68,7 +79,8 @@
                 </div>
                 <br>
                 <div class="button-row">
-                    <button mat-flat-button style="float:right" (click)="goToList()" color="primary">Finalizar pedido</button>
+                    <button mat-flat-button style="float:right" (click)="goToList()" color="primary">Finalizar
+                        pedido</button>
                 </div>
             </form>
             <br>

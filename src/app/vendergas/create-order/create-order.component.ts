@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Order, Product, Client, OrderProduct } from "../models";
-import { OrderService, ProductService, ClientService } from "../services";
+import { OrderService, ProductService, ClientService, CompanyService } from "../services";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonFunctions } from '../shared';
@@ -23,11 +23,13 @@ export class CreateOrderComponent implements OnInit {
     order: Order;
     clients: Client[];
     products: Product[];
+    nomeFantasia = ""
 
     constructor(
         private orderService: OrderService,
         private productService: ProductService,
         private clientService: ClientService,
+        private companyService: CompanyService,
         private router: Router,
         private route: ActivatedRoute,
         private commonFunctions: CommonFunctions
@@ -41,6 +43,20 @@ export class CreateOrderComponent implements OnInit {
             (success) => {
                 this.getAllClients()
                 this.getAllProducts()
+                const cnpj = localStorage.getItem('current_cnpj') || ""
+                // NOTE: Busca a empresa atual e adiciona o nome dela no formulário
+                this.companyService.getOneCompany(cnpj).subscribe(
+                    response => {
+                        this.nomeFantasia = response[0].nomeFantasia;
+
+                    },
+                    error => {
+                        if (error.status == 401) {
+                            this.commonFunctions.goToLogin();
+                        }
+                        this.commonFunctions.openSnackBar(error.error.message);
+                    }
+                )
             }
         );
 
@@ -49,14 +65,14 @@ export class CreateOrderComponent implements OnInit {
     // NOTE: Pega todos os clientes que estão relacionadas a empresa em que o
     // pedido está sendo criado para que sejam apresentados no select de clientes.
     getAllClients(): any {
-        const cnpj = localStorage.getItem('current_order_cnpj') || ""
+        const cnpj = localStorage.getItem('current_cnpj') || ""
         this.clientService.getAllClients(cnpj).subscribe(
             (value) => {
                 this.clients = value
 
             },
             (error) => {
-                if(error.status == 401) {
+                if (error.status == 401) {
                     this.commonFunctions.goToLogin();
                 }
                 console.log(error);
@@ -66,14 +82,14 @@ export class CreateOrderComponent implements OnInit {
     // NOTE: Pega todos os produtos que estão relacionadas a empresa em que o
     // pedido está sendo criado para que sejam apresentados no select de produtos.
     getAllProducts(): any {
-        const cnpj = localStorage.getItem('current_order_cnpj') || ""
+        const cnpj = localStorage.getItem('current_cnpj') || ""
         this.productService.getAllProducts(cnpj).subscribe(
             (value) => {
                 this.products = value
 
             },
             (error) => {
-                if(error.status == 401) {
+                if (error.status == 401) {
                     this.commonFunctions.goToLogin();
                 }
                 console.log(error);
@@ -84,14 +100,14 @@ export class CreateOrderComponent implements OnInit {
     // NOTE: Envia os dados do pedido para que seja cadastrada.
     createOrder() {
         if (this.createOrderForm.form.valid) {
-            this.order.cnpj = localStorage.getItem('current_order_cnpj') || ""
+            this.order.cnpj = localStorage.getItem('current_cnpj') || ""
             this.orderService.registerOrder(this.order).subscribe(
                 response => {
                     this.orderNumber = response.numero
                     this.commonFunctions.openSnackBar("Pedido criado com sucesso!")
                 },
                 error => {
-                    if(error.status == 401) {
+                    if (error.status == 401) {
                         this.commonFunctions.goToLogin();
                     }
                     this.commonFunctions.openSnackBar(error.error.message)
@@ -127,7 +143,7 @@ export class CreateOrderComponent implements OnInit {
                     this.commonFunctions.openSnackBar("Produto adicionado com sucesso!")
                 },
                 error => {
-                    if(error.status == 401) {
+                    if (error.status == 401) {
                         this.commonFunctions.goToLogin();
                     }
                     this.commonFunctions.openSnackBar(error.error.message)
@@ -157,7 +173,7 @@ export class CreateOrderComponent implements OnInit {
                 this.commonFunctions.openSnackBar("Produto retirado com sucesso!")
             },
             error => {
-                if(error.status == 401) {
+                if (error.status == 401) {
                     this.commonFunctions.goToLogin();
                 }
                 this.commonFunctions.openSnackBar("Produto retirado com sucesso!")

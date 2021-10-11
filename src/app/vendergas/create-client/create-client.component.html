@@ -1,9 +1,12 @@
 <div id="" class="contentContainerBordered">
-    <!-- <header>
-        <img height="50" src="../../../assets/logo.c037bd80.svg" class="logo">
-    </header> -->
     <br>
     <form #createClientForm="ngForm" class="form">
+        <header class="header">
+            <h1>
+                Cadastrar cliente - {{nomeFantasia}}
+            </h1>
+        </header>
+        <br>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Nome</mat-label>
             <input matInput type="text" name="nome" [(ngModel)]="client.nome" #nome="ngModel"

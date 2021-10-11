@@ -4,6 +4,12 @@
     </header> -->
     <br>
     <form #createCompanyForm="ngForm" class="form">
+        <header class="header">
+            <h1>
+                Cadastrar empresa
+            </h1>
+        </header>
+        <br>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Razão Social</mat-label>
             <input matInput type="text" name="razaoSocial" [(ngModel)]="company.razaoSocial" #razaoSocial="ngModel"

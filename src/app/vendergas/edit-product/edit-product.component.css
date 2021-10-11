@@ -56,6 +56,13 @@ section {
     align-items: center;
 }
 
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* .logo {
     background-size: auto 28px;
     width: 129px;

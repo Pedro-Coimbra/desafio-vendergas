@@ -42,7 +42,7 @@ export class ListCompanyComponent implements OnInit {
     // NOTE: Seta o cnpj da empresa no localStorage e redireciona a página
     // para a página de edição
     goToEdit(company: any) {
-        localStorage.setItem('current_company_cnpj', company.cnpj);
+        localStorage.setItem('current_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/edit-company']);
     }
 
@@ -66,7 +66,7 @@ export class ListCompanyComponent implements OnInit {
     // NOTE: Seta o cnpj da empresa no localStorage e redireciona a página
     // para a página de criação de cliente
     goToCreateClient(company: any): any {
-        localStorage.setItem('current_company_cnpj', company.cnpj);
+        localStorage.setItem('current_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/create-client']);
     }
 
@@ -113,7 +113,7 @@ export class ListCompanyComponent implements OnInit {
     // NOTE: Redireciona o usuário para a lista de clientes e adiciona o cnpj
     // da empresa no localStorage
     goToListClients(company: any) {
-        localStorage.setItem('current_client_cnpj', company.cnpj);
+        localStorage.setItem('current_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/list-client']);
     }
     // NOTE: Redireciona o usuário para a lista de produtos e adiciona o cnpj
@@ -125,7 +125,7 @@ export class ListCompanyComponent implements OnInit {
     // NOTE: Redireciona o usuário para a lista de pedidos e adiciona o cnpj
     // da empresa no localStorage
     goToListOrders(company: any) {
-        localStorage.setItem('current_order_cnpj', company.cnpj);
+        localStorage.setItem('current_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/list-order']);
     }
     // NOTE: Redireciona o usuário para a criação de produtos e adiciona o cnpj
@@ -137,7 +137,7 @@ export class ListCompanyComponent implements OnInit {
     // NOTE: Redireciona Para a criação de pedidos e adiciona o cnpj da empresa
     // no localStorage
     goToCreateOrder(company: any) {
-        localStorage.setItem('current_order_cnpj', company.cnpj);
+        localStorage.setItem('current_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/create-order']);
     }
 }

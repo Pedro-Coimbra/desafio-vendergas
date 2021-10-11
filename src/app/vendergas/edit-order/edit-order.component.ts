@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Order, Product, Client, OrderProduct } from "../models";
-import { OrderService, ProductService, ClientService } from "../services";
+import { OrderService, ProductService, ClientService, CompanyService } from "../services";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonFunctions } from '../shared';
@@ -22,10 +22,12 @@ export class EditOrderComponent implements OnInit {
     order: Order;
     clients: Client[];
     products: Product[];
+    nomeFantasia = ""
 
     constructor(
         private orderService: OrderService,
         private productService: ProductService,
+        private companyService: CompanyService,
         private clientService: ClientService,
         private router: Router,
         private route: ActivatedRoute,
@@ -41,6 +43,20 @@ export class EditOrderComponent implements OnInit {
                 this.getOrder()
             }
         );
+        const cnpj = localStorage.getItem('current_cnpj') || ""
+        // NOTE: Busca a empresa atual e adiciona o nome dela no formulário
+        this.companyService.getOneCompany(cnpj).subscribe(
+            response => {
+                this.nomeFantasia = response[0].nomeFantasia;
+
+            },
+            error => {
+                if (error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
+                this.commonFunctions.openSnackBar(error.error.message);
+            }
+        )
     }
 
     // NOTE: Envia o produto para que ele seja cadastrado no pedido
@@ -84,7 +100,7 @@ export class EditOrderComponent implements OnInit {
     // NOTE: Pega todos os clientes que estão relacionadas a empresa em que o
     // pedido está sendo editado para que sejam apresentados no select de clientes.
     getAllClients(): any {
-        const cnpj = localStorage.getItem('current_order_cnpj') || ""
+        const cnpj = localStorage.getItem('current_cnpj') || ""
         this.clientService.getAllClients(cnpj).subscribe(
             (value) => {
                 this.clients = value
@@ -101,7 +117,7 @@ export class EditOrderComponent implements OnInit {
     // NOTE: Pega todos os produtos que estão relacionadas a empresa em que o
     // pedido está sendo editado para que sejam apresentados no select de produtos.
     getAllProducts(): any {
-        const cnpj = localStorage.getItem('current_order_cnpj') || ""
+        const cnpj = localStorage.getItem('current_cnpj') || ""
         this.productService.getAllProducts(cnpj).subscribe(
             (value) => {
                 this.products = value
@@ -150,7 +166,7 @@ export class EditOrderComponent implements OnInit {
     // NOTE: Envia o registro do pedido para ser editado
     editOrder() {
         const pedidoNumero = localStorage.getItem('current_order_number') || ""
-        const cnpj = localStorage.getItem('current_order_cnpj') || ""
+        const cnpj = localStorage.getItem('current_cnpj') || ""
         this.order.pedidoNumero = +pedidoNumero
         this.order.cnpj = cnpj
 

@@ -26,7 +26,7 @@ export class EditCompanyComponent implements OnInit {
     ngOnInit(): void {
         this.company = new Company();
         // NOTE: Pega o CNPJ da empresa atual pelo localStorage
-        this.currentCnpj = localStorage.getItem('current_company_cnpj') || ""
+        this.currentCnpj = localStorage.getItem('current_cnpj') || ""
         this.route.params.subscribe(
             (success) => {
                 this.getCompany();

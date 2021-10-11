@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { ProductService } from "../services";
+import { ProductService, CompanyService } from "../services";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Product } from "../models";
 import { CommonFunctions } from '../shared';
@@ -12,15 +12,17 @@ import { CommonFunctions } from '../shared';
 })
 export class EditProductComponent implements OnInit {
     currentProduct = ""
+    nomeFantasia = ""
     product: Product;
 
     @ViewChild('editProductForm', { static : true }) editProductForm: NgForm;
 
     constructor(
         private productService: ProductService,
+        private companyService: CompanyService,
         private router: Router,
         private route: ActivatedRoute,
-        private commonFunctions: CommonFunctions
+        private commonFunctions: CommonFunctions,
     ) { }
 
     ngOnInit(): void {
@@ -32,6 +34,21 @@ export class EditProductComponent implements OnInit {
                 this.getProduct();
             }
         );
+
+        const cnpj = localStorage.getItem('current_cnpj') || ""
+        // NOTE: Busca a empresa atual e adiciona o nome dela no formulário
+        this.companyService.getOneCompany(cnpj).subscribe(
+            response => {
+                this.nomeFantasia = response[0].nomeFantasia;
+
+            },
+            error => {
+                if (error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
+                this.commonFunctions.openSnackBar(error.error.message);
+            }
+        )
     }
 
     // NOTE: Faz a pesquisa do produto atual que será editado

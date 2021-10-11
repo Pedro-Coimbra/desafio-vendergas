@@ -39,7 +39,7 @@ export class ListOrderComponent implements OnInit {
 
     // NOTE: Procura todos os pedidos criados naquela empresa
     getAllOrdersAndProducts(): any {
-        const cnpj = localStorage.getItem('current_order_cnpj') || ""
+        const cnpj = localStorage.getItem('current_cnpj') || ""
         this.orderService.getAllOrdersAndProducts(cnpj).subscribe(
             (value) => {
                 this.orderProducts.data = []

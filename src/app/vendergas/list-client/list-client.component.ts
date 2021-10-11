@@ -48,7 +48,7 @@ export class ListClientComponent implements OnInit {
     // NOTE: Pega todos os clientes que estão relacionadas a empresa previamente 
     // selecionada para que sejam apresentados na tabela.
     getAllClients(): any {
-        const cnpj = localStorage.getItem('current_client_cnpj') || ""
+        const cnpj = localStorage.getItem('current_cnpj') || ""
         this.clientService.getAllClients(cnpj).subscribe(
             (value) => {
                 this.clients = value

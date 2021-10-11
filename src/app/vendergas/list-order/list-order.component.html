@@ -1,5 +1,12 @@
 <div class="container">
 
+    <br>
+    <header class="header">
+        <h1>
+            Lista de pedidos
+        </h1>
+    </header>
+    <br>
     <table mat-table [dataSource]="orderProducts" class="mat-elevation-z8">
 
         <!-- Coluna do Numero do pedido -->
@@ -34,9 +41,9 @@
         <!-- Coluna com os botões de editar e excluir -->
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
-            <mat-cell *matCellDef="let row" >
-                 <button mat-button color="accent" (click)="goToEdit(row)" >Editar</button>
-                 <button mat-button color="warn" (click)="deleteOrder(row)" >Excluir</button>
+            <mat-cell *matCellDef="let row">
+                <button mat-button color="accent" (click)="goToEdit(row)">Editar</button>
+                <button mat-button color="warn" (click)="deleteOrder(row)">Excluir</button>
             </mat-cell>
         </ng-container>
 

@@ -3,6 +3,12 @@
         <br>
         <!-- Primeiro passo -->
         <mat-step [stepControl]="editOrderForm">
+            <header class="header">
+                <h1>
+                    Editar pedido - {{nomeFantasia}}
+                </h1>
+            </header>
+            <br>
             <form #editOrderForm="ngForm" class="form">
                 <ng-template matStepLabel>Editar pedido</ng-template>
                 <mat-form-field class="full-width" appearance="fill">
@@ -37,6 +43,11 @@
         <!-- Segundo passo -->
         <mat-step [stepControl]="editOrderProductForm">
             <br>
+            <header class="header">
+                <h1>
+                    Editar pedido - {{nomeFantasia}}
+                </h1>
+            </header>
             <br>
             <form #editOrderProductForm="ngForm" class="form">
                 <ng-template matStepLabel>Editar produtos</ng-template>

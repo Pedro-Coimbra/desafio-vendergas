@@ -4,6 +4,12 @@
     </header> -->
     <br>
     <form #createProductForm="ngForm" class="form">
+        <header class="header">
+            <h1>
+                Cadastrar produto - {{nomeFantasia}}
+            </h1>
+        </header>
+        <br>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Nome do produto</mat-label>
             <input matInput type="text" name="nome" [(ngModel)]="product.nome" #nome="ngModel"
@@ -38,7 +44,7 @@
         </mat-form-field>
 
         <div class="button-row">
-            <button mat-flat-button color="warn" >Cancelar</button>
+            <button mat-flat-button color="warn">Cancelar</button>
             <button mat-flat-button style="float:right" (click)="createProduct()" color="primary">Cadastrar</button>
         </div>
     </form>

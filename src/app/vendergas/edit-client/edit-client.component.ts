@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Client } from "../models";
-import { ClientService } from "../services";
+import { ClientService, CompanyService } from "../services";
 import { CommonFunctions } from '../shared';
 
 @Component({
@@ -14,11 +14,13 @@ export class EditClientComponent implements OnInit {
 
     @ViewChild('editClientForm', { static: true }) editClientForm: NgForm;
 
+    nomeFantasia = ""
     currentEmail = ""
     client: Client;
 
     constructor(
         private clientService: ClientService,
+        private companyService: CompanyService,
         private commonFunctions: CommonFunctions,
         private router: Router,
         private route: ActivatedRoute,
@@ -33,6 +35,20 @@ export class EditClientComponent implements OnInit {
                 this.getClient();
             }
         );
+        const cnpj = localStorage.getItem('current_cnpj') || ""
+        // NOTE: Busca a empresa atual e adiciona o nome dela no formulário
+        this.companyService.getOneCompany(cnpj).subscribe(
+            response => {
+                this.nomeFantasia = response[0].nomeFantasia;
+
+            },
+            error => {
+                if (error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
+                this.commonFunctions.openSnackBar(error.error.message);
+            }
+        )
     }
 
     // NOTE: Retorna para a página que lista os clientes 
