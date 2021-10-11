@@ -46,7 +46,7 @@ export class ListOrderComponent implements OnInit {
                 for(var idx in value) {
                     var produtos = []
                     for(var idx2 in value[idx].produtos) {
-                        produtos.push(value[idx].produtos[idx2].nome)
+                        produtos.push(" "+value[idx].produtos[idx2].nome+" ("+value[idx].produtos[idx2].pedidoProdutos.quantidade+") ")
                     }
                     // NOTE: Monta os dados da tabela
                     this.orderProducts.data.push({
