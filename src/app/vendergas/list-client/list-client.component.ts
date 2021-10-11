@@ -44,6 +44,10 @@ export class ListClientComponent implements OnInit {
         localStorage.setItem('current_client_email', client.email);
         this.router.navigate(['/vendergas/edit-client']);
     }
+    // NOTE: Redireciona a página para a criação de cliente
+    goToCreateClient() {
+        this.router.navigate(['/vendergas/create-client']);
+    }
 
     // NOTE: Pega todos os clientes que estão relacionadas a empresa previamente 
     // selecionada para que sejam apresentados na tabela.

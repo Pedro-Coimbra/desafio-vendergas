@@ -73,6 +73,10 @@ export class ListOrderComponent implements OnInit {
         localStorage.setItem('current_order_number', order.pedidoNumero);
         this.router.navigate(['/vendergas/edit-order']);
     }
+    // NOTE: Vai para a página de criação de pedidos
+    goToCreateOrder() {
+        this.router.navigate(['/vendergas/create-order']);
+    }
 
     // NOTE: Função que aciona o dialog de deleção de pedido
     deleteOrder(order: any): void {

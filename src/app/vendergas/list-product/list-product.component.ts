@@ -61,6 +61,11 @@ export class ListProductComponent implements OnInit {
         this.router.navigate(['/vendergas/edit-product']);
     }
 
+    // NOTE: redireciona a página para a página de criação de produto
+    goToCreateProduct() {
+        this.router.navigate(['/vendergas/create-product']);
+    }
+
     // NOTE: Função que aciona o dialog de deleção de produto
     deleteProduct(product: any): void {
 

@@ -65,9 +65,14 @@ export class ListCompanyComponent implements OnInit {
 
     // NOTE: Seta o cnpj da empresa no localStorage e redireciona a página
     // para a página de criação de cliente
-    goToCreateClient(company: any): any {
+    goToCreateClient(company: any) {
         localStorage.setItem('current_cnpj', company.cnpj);
         this.router.navigate(['/vendergas/create-client']);
+    }
+
+    // NOTE: Redireciona a página para a criação de empresa
+    goToCreateCompany() {
+        this.router.navigate(['/vendergas/create-company']);
     }
 
     // NOTE: Aciona o componente do dialog

@@ -7,5 +7,10 @@ table {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 20%;
+    margin-top: 10%;
+}
+
+.list-button {
+  position: absolute;
+
 }

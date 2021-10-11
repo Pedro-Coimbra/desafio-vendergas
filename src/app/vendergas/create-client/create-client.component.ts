@@ -27,9 +27,9 @@ export class CreateClientComponent implements OnInit {
     async ngOnInit(): Promise<void> {
         this.client = new Client();
 
-        const cnpj = localStorage.getItem('current_cnpj') || ""
+        this.client.cnpj = localStorage.getItem('current_cnpj') || ""
         // NOTE: Busca a empresa atual e adiciona o nome dela no formulário
-        this.companyService.getOneCompany(cnpj).subscribe(
+        this.companyService.getOneCompany(this.client.cnpj).subscribe(
             response => {
                 this.nomeFantasia = response[0].nomeFantasia;
 
