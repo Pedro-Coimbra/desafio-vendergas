@@ -2,6 +2,13 @@
 <p>
     <mat-toolbar color="primary">
         <span>Desafio Vendergás</span>
+        <button *ngIf="logged==true" mat-raised-button color="accent" (click)="goToListCompanies()" class="toolbar-buttons">
+            Listar empresas
+        </button>
+        <span *ngIf="logged==true" class="hello">Olá, {{nomeUsuario}}!</span>
+
+        <mat-icon *ngIf="logged==true" (click)="logout()" class="logout" aria-hidden="false" aria-label="Listar pedidos" >logout</mat-icon>
+
     </mat-toolbar>
 </p>
 <!-- Conteúdo da página -->
@@ -10,7 +17,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    <!-- {{ title }} -->
+
                 </a>
             </div>
         </div>

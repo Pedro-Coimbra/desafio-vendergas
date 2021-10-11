@@ -92,7 +92,8 @@ exports.login = (req, res) => {
 
                     return res.status(200).send({
                         message: "Autenticado com sucesso!",
-                        'token': token
+                        'token': token,
+                        'nome': data["nome"]
                     })
                 }
                 return res.status(401).send({ message: "Falha na autenticação" })
