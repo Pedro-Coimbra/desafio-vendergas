@@ -60,5 +60,9 @@ export class CreateClientComponent implements OnInit {
             )
         }
     }
+    // NOTE: Retorna para a página que lista os clientes 
+    goToList() {
+        this.router.navigate(['/vendergas/list-client']);
+    }
 
 }

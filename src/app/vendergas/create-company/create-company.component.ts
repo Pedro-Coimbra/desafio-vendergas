@@ -42,6 +42,9 @@ export class CreateCompanyComponent implements OnInit {
             )
         }
     }
-
+    // NOTE: Retorna para a página que lista as empresas 
+    goToList() {
+        this.router.navigate(['/vendergas/list-company']);
+    }
 
 }

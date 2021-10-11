@@ -61,5 +61,8 @@ export class CreateProductComponent implements OnInit {
             )
         }
     }
-
+    // NOTE: Retorna para a página que lista os produtos 
+    goToList() {
+        this.router.navigate(['/vendergas/list-product']);
+    }
 }
