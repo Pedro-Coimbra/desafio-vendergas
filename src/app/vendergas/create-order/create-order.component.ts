@@ -3,8 +3,8 @@ import { NgForm } from "@angular/forms";
 import { Order, Product, Client, OrderProduct } from "../models";
 import { OrderService, ProductService, ClientService } from "../services";
 import { Router, ActivatedRoute } from "@angular/router";
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-create-order',
@@ -30,7 +30,7 @@ export class CreateOrderComponent implements OnInit {
         private clientService: ClientService,
         private router: Router,
         private route: ActivatedRoute,
-        private _snackBar: MatSnackBar
+        private commonFunctions: CommonFunctions
     ) { }
 
     ngOnInit(): void {
@@ -56,6 +56,9 @@ export class CreateOrderComponent implements OnInit {
 
             },
             (error) => {
+                if(error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
                 console.log(error);
             }
         )
@@ -70,6 +73,9 @@ export class CreateOrderComponent implements OnInit {
 
             },
             (error) => {
+                if(error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
                 console.log(error);
             }
         )
@@ -82,10 +88,13 @@ export class CreateOrderComponent implements OnInit {
             this.orderService.registerOrder(this.order).subscribe(
                 response => {
                     this.orderNumber = response.numero
-                    this.openSnackBar("Pedido criado com sucesso!")
+                    this.commonFunctions.openSnackBar("Pedido criado com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
@@ -99,7 +108,7 @@ export class CreateOrderComponent implements OnInit {
 
                 if (this.orderProducts.data[idx]['produtoId'] == this.order.produtoId) {
 
-                    this.openSnackBar("Esse produto já foi adicionado ao pedido")
+                    this.commonFunctions.openSnackBar("Esse produto já foi adicionado ao pedido")
                     return
                 }
             }
@@ -115,10 +124,13 @@ export class CreateOrderComponent implements OnInit {
                     })
                     this.orderProducts._updateChangeSubscription();
 
-                    this.openSnackBar("Produto adicionado com sucesso!")
+                    this.commonFunctions.openSnackBar("Produto adicionado com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
@@ -142,11 +154,13 @@ export class CreateOrderComponent implements OnInit {
         // NOTE: Envia as chaves do produto para que ele seja removido do pedido
         this.orderService.deleteProduct(product.pedidoNumero, product.produtoId).subscribe(
             response => {
-                this.openSnackBar("Produto retirado com sucesso!")
+                this.commonFunctions.openSnackBar("Produto retirado com sucesso!")
             },
             error => {
-                this.openSnackBar("Produto retirado com sucesso!")
-                // this.openSnackBar(error.error.message)
+                if(error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
+                this.commonFunctions.openSnackBar("Produto retirado com sucesso!")
             }
         )
     }
@@ -156,10 +170,5 @@ export class CreateOrderComponent implements OnInit {
         this.router.navigate(['/vendergas/list-order']);
     }
 
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-    openSnackBar(message: string) {
-        this._snackBar.open(message, "Undo", {
-            duration: 5000
-        })
-    }
+
 }

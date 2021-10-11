@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { OrderProduct } from "../models";
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommonFunctions } from '../shared';
 
 export interface DialogOrderData {
     pedidoNumero: number;
@@ -23,7 +24,8 @@ export class ListOrderComponent implements OnInit {
         private orderService: OrderService,
         private route: ActivatedRoute,
         private router: Router,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private commonFunctions: CommonFunctions
     ) { }
 
     ngOnInit(): void {
@@ -59,6 +61,9 @@ export class ListOrderComponent implements OnInit {
                 this.orderProducts._updateChangeSubscription();
             },
             (error) => {
+                if(error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
                 console.log(error);
             }
         )
@@ -88,6 +93,9 @@ export class ListOrderComponent implements OnInit {
                         this.getAllOrdersAndProducts()
                     },
                     (error) => {
+                        if(error.status == 401) {
+                            this.commonFunctions.goToLogin();
+                        }
                         // TODO: Por algum motivo mesmo deletando tudo corretamente
                         // ele cai aqui no "error"
                         // NOTE: Atualiza os dados da tabela

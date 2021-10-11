@@ -3,8 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Client } from "../models";
 import { ClientService } from "../services";
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-create-client',
@@ -19,7 +18,8 @@ export class CreateClientComponent implements OnInit {
 
     constructor(
         private clientService: ClientService,
-        private _snackBar: MatSnackBar
+        private router: Router,
+        private commonFunctions: CommonFunctions
     ) { }
 
     ngOnInit(): void {
@@ -32,19 +32,16 @@ export class CreateClientComponent implements OnInit {
             this.client.cnpj = localStorage.getItem('current_company_cnpj') || ""
             this.clientService.registerClient(this.client).subscribe(
                 response => {
-                    this.openSnackBar("Cliente criada com sucesso!")
+                    this.commonFunctions.openSnackBar("Cliente criado com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
     }
 
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-	openSnackBar(message: string) {
-		this._snackBar.open(message, "Undo",{
-			duration: 5000
-		})
-	}
 }

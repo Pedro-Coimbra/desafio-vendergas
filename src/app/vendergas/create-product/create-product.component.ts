@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Product } from "../models";
 import { ProductService } from "../services";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from "@angular/router";
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-create-product',
@@ -17,7 +18,8 @@ export class CreateProductComponent implements OnInit {
 
     constructor(
         private productService: ProductService,
-        private _snackBar: MatSnackBar
+        private commonFunctions: CommonFunctions,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -32,20 +34,16 @@ export class CreateProductComponent implements OnInit {
 
             this.productService.registerProduct(this.product).subscribe(
                 response => {
-                    this.openSnackBar("Produto criado com sucesso!")
+                    this.commonFunctions.openSnackBar("Produto criado com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
     }
-
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-	openSnackBar(message: string) {
-		this._snackBar.open(message, "Undo",{
-			duration: 5000
-		})
-	}
 
 }

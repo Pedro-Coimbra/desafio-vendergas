@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { ProductService } from "../services";
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Product } from "../models";
-
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-edit-product',
@@ -21,7 +20,7 @@ export class EditProductComponent implements OnInit {
         private productService: ProductService,
         private router: Router,
         private route: ActivatedRoute,
-        private _snackBar: MatSnackBar
+        private commonFunctions: CommonFunctions
     ) { }
 
     ngOnInit(): void {
@@ -44,6 +43,9 @@ export class EditProductComponent implements OnInit {
                 this.editProductForm.controls["valor"].setValue(value[0].valor)
             },
             (error) => {
+                if(error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
                 console.log(error);
             }
         )
@@ -55,20 +57,16 @@ export class EditProductComponent implements OnInit {
             this.product.id = +this.currentProduct
             this.productService.updateProduct(this.product).subscribe(
                 response => {
-                    this.openSnackBar("Produto editado com sucesso!")
+                    this.commonFunctions.openSnackBar("Produto editado com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
-    }
-
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-    openSnackBar(message: string) {
-        this._snackBar.open(message, "Undo", {
-            duration: 5000
-        })
     }
 
     // NOTE: Retorna para a página que lista os produtos 

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { CompanyService } from "../services";
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Company } from "../models";
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-edit-company',
@@ -20,7 +20,7 @@ export class EditCompanyComponent implements OnInit {
         private companyService: CompanyService,
         private router: Router,
         private route: ActivatedRoute,
-        private _snackBar: MatSnackBar
+        private commonFunctions: CommonFunctions
     ) { }
 
     ngOnInit(): void {
@@ -49,6 +49,9 @@ export class EditCompanyComponent implements OnInit {
                 this.editCompanyForm.controls["cnpj"].setValue(value[0].cnpj)
             },
             (error) => {
+                if(error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
                 console.log(error);
             }
         )
@@ -59,20 +62,16 @@ export class EditCompanyComponent implements OnInit {
         if (this.editCompanyForm.form.valid) {
             this.companyService.updateCompany(this.company).subscribe(
                 response => {
-                    this.openSnackBar("Empresa editada com sucesso!")
+                    this.commonFunctions.openSnackBar("Empresa editada com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
     }
 
-    // TODO: Generalizar essa função, já que ela está sendo utilizada em vários locais
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-    openSnackBar(message: string) {
-        this._snackBar.open(message, "Undo", {
-            duration: 5000
-        })
-    }
 }

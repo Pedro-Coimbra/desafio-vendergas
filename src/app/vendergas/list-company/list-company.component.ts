@@ -3,7 +3,7 @@ import { CompanyService } from "../services";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Company } from "../models";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { CommonFunctions } from '../shared';
 
 export interface DialogCompanyData {
     nomeFantasia: string;
@@ -25,7 +25,8 @@ export class ListCompanyComponent implements OnInit {
         private companyService: CompanyService,
         private router: Router,
         private route: ActivatedRoute,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private commonFunctions: CommonFunctions
     ) { }
 
     // NOTE: Ao iniciar a página a função "getAllCompanies" é chamada para que a
@@ -54,6 +55,9 @@ export class ListCompanyComponent implements OnInit {
 
             },
             (error) => {
+                if(error.status == 401) {
+                    this.router.navigate(['/vendergas/login']);
+                }
                 console.log(error);
             }
         )
@@ -84,6 +88,9 @@ export class ListCompanyComponent implements OnInit {
                         this.getAllCompanies();
                     },
                     (error) => {
+                        if(error.status == 401) {
+                            this.commonFunctions.goToLogin();
+                        }
                         // TODO: Por algum motivo mesmo deletando tudo corretamente
                         // ele cai aqui no "error"
                         // NOTE: Atualiza os dados da tabela
@@ -92,6 +99,9 @@ export class ListCompanyComponent implements OnInit {
                                 this.companies = value;
                             },
                             (error) => {
+                                if(error.status == 401) {
+                                    this.commonFunctions.goToLogin();
+                                }
                                 console.log(error);
                             }
                         )

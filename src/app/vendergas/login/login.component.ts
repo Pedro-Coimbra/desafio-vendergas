@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { User } from "../models";
 import { UserService } from "../services";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private userService: UserService,
         private router: Router,
-        private _snackBar: MatSnackBar) { }
+        private commonFunctions: CommonFunctions) { }
 
 
     ngOnInit(): void {
@@ -39,20 +39,13 @@ export class LoginComponent implements OnInit {
                 response => {
                     // NOTE: Define o token do usuário no localstorage
                     localStorage.setItem('access_token', response.token);
-                    this.openSnackBar("Usuário autenticado com sucesso!")
-                    // this.router.navigate(['/vendergas/create-company']);
+                    this.commonFunctions.openSnackBar("Usuário autenticado com sucesso!")
+                    this.router.navigate(['/vendergas/list-company']);
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    this.commonFunctions.openSnackBar(error.error.message)
                 });
         }
     }
 
-    // TODO: Generalizar essa função, já que ela está sendo utilizada em vários locais
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-    openSnackBar(message: string) {
-        this._snackBar.open(message, "Undo", {
-            duration: 5000
-        })
-    }
 }

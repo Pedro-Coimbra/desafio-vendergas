@@ -3,8 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Client } from "../models";
 import { ClientService } from "../services";
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-edit-client',
@@ -20,7 +19,7 @@ export class EditClientComponent implements OnInit {
 
     constructor(
         private clientService: ClientService,
-        private _snackBar: MatSnackBar,
+        private commonFunctions: CommonFunctions,
         private router: Router,
         private route: ActivatedRoute,
     ) { }
@@ -47,10 +46,13 @@ export class EditClientComponent implements OnInit {
 
             this.clientService.updateClient(this.client).subscribe(
                 response => {
-                    this.openSnackBar("Cliente editado com sucesso!")
+                    this.commonFunctions.openSnackBar("Cliente editado com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
@@ -65,15 +67,12 @@ export class EditClientComponent implements OnInit {
                 this.editClientForm.controls["telefone"].setValue(value[0].telefone)
             },
             (error) => {
+                if(error.status == 401) {
+                    this.commonFunctions.goToLogin();
+                }
                 console.log(error);
             }
         )
     }
 
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-    openSnackBar(message: string) {
-        this._snackBar.open(message, "Undo", {
-            duration: 5000
-        })
-    }
 }

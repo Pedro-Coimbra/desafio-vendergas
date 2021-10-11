@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Company } from "../models";
 import { CompanyService } from "../services";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonFunctions } from '../shared';
 
 @Component({
     selector: 'app-create-company',
@@ -20,7 +20,7 @@ export class CreateCompanyComponent implements OnInit {
     constructor(
         private companyService: CompanyService,
 		private router: Router,
-		private _snackBar: MatSnackBar) { }
+		private commonFunctions: CommonFunctions) { }
 
     ngOnInit(): void {
         this.company = new Company();
@@ -31,19 +31,17 @@ export class CreateCompanyComponent implements OnInit {
 
             this.companyService.registerCompany(this.company).subscribe(
                 response => {
-                    this.openSnackBar("Empresa criada com sucesso!")
+                    this.commonFunctions.openSnackBar("Empresa criada com sucesso!")
                 },
                 error => {
-                    this.openSnackBar(error.error.message)
+                    if(error.status == 401) {
+                        this.commonFunctions.goToLogin();
+                    }
+                    this.commonFunctions.openSnackBar(error.error.message)
                 }
             )
         }
     }
-    // NOTE: Adiciona um SnackBar na tela que dura 5 segundos
-	openSnackBar(message: string) {
-		this._snackBar.open(message, "Undo",{
-			duration: 5000
-		})
-	}
+
 
 }
