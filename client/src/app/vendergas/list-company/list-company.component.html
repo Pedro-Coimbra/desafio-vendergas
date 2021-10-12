@@ -1,0 +1,73 @@
+<div class="container">
+
+    <br>
+    <header class="header">
+        <h1>
+            Lista de empresas
+        </h1>
+    </header>
+    <br>
+    <table mat-table [dataSource]="companies" class="mat-elevation-z8">
+
+        <!-- Coluna do Nome Fantasia -->
+        <ng-container matColumnDef="nomeFantasia">
+            <th mat-header-cell *matHeaderCellDef> Nome Fantasia </th>
+            <td mat-cell *matCellDef="let element"> {{element.nomeFantasia}} </td>
+        </ng-container>
+
+        <!-- Coluna da Razão Social -->
+        <ng-container matColumnDef="razaoSocial">
+            <th mat-header-cell *matHeaderCellDef> Razão Social </th>
+            <td mat-cell *matCellDef="let element"> {{element.razaoSocial}} </td>
+        </ng-container>
+
+        <!-- Coluna do CNPJ -->
+        <ng-container matColumnDef="cnpj">
+            <th mat-header-cell *matHeaderCellDef> CNPJ </th>
+            <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
+        </ng-container>
+
+        <!-- Coluna com os botões de adicionar e listar clientes -->
+        <ng-container matColumnDef="clients">
+            <th mat-header-cell *matHeaderCellDef> Clientes </th>
+            <td *matCellDef="let row">
+                <mat-icon aria-hidden="false" aria-label="Adicionar cliente" (click)="goToCreateClient(row)">person_add</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Listar clientes" (click)="goToListClients(row)">view_list</mat-icon>
+            </td>
+        </ng-container>
+
+        <!-- Coluna com os botões de adicionar e listar produtos -->
+        <ng-container matColumnDef="products">
+            <th mat-header-cell *matHeaderCellDef> Produtos </th>
+            <td *matCellDef="let row">
+                <mat-icon aria-hidden="false" aria-label="Adicionar produto" (click)="goToCreateProduct(row)">post_add</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Listar produtos" (click)="goToListProducts(row)">view_list</mat-icon>
+            </td>
+        </ng-container>
+
+        <!-- Coluna com os botões de adicionar e listar pedidos -->
+        <ng-container matColumnDef="orders">
+            <th mat-header-cell *matHeaderCellDef> Pedidos </th>
+            <td *matCellDef="let row">
+                <mat-icon aria-hidden="false" aria-label="Adicionar pedido" (click)="goToCreateOrder(row)" >add_shopping_cart</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Listar pedidos" (click)="goToListOrders(row)" >view_list</mat-icon>
+            </td>
+        </ng-container>
+        <!-- Coluna com os botões de editar e excluir empresas -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td *matCellDef="let row">
+                <button mat-button color="accent" (click)="goToEdit(row)">Editar</button>
+                <button mat-button color="warn" (click)="deleteCompany(row)">Excluir</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<div class="container">
+    <button mat-raised-button color="accent" (click)="goToCreateCompany()" class="list-button">
+        Cadastrar empresa
+    </button>
+</div>

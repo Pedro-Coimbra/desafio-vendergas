@@ -1,0 +1,51 @@
+<div id="" class="contentContainerBordered">
+    <!-- <header>
+        <img height="50" src="../../../assets/logo.c037bd80.svg" class="logo">
+    </header> -->
+    <br>
+    <form #createProductForm="ngForm" class="form">
+        <header class="header">
+            <h1>
+                Cadastrar produto - {{nomeFantasia}}
+            </h1>
+        </header>
+        <br>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Nome do produto</mat-label>
+            <input matInput type="text" name="nome" [(ngModel)]="product.nome" #nome="ngModel"
+                placeholder="Digite o nome do produto" value="" required>
+            <div *ngIf="nome.errors && (nome.dirty || nome.touched)" class="alert alert-danger">
+                <div [hidden]="!nome.errors.required">
+                    Esse campo é obrigatório!
+                </div>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Desccrição</mat-label>
+            <input matInput type="text" name="descricao" [(ngModel)]="product.descricao" #descricao="ngModel"
+                placeholder="Digite a descrição do produto" value="" required>
+            <div *ngIf="descricao.errors && (descricao.dirty || descricao.touched)" class="alert alert-danger">
+                <div [hidden]="!descricao.errors.required">
+                    Esse campo é obrigatório!
+                </div>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Valor</mat-label>
+            <input matInput type="number" name="valor" [(ngModel)]="product.valor" #valor="ngModel"
+                placeholder="Digite o valor do produto" value="" required>
+            <div *ngIf="valor.errors && (valor.dirty || valor.touched)" class="alert alert-danger">
+                <div [hidden]="!valor.errors.required">
+                    Esse campo é obrigatório!
+                </div>
+            </div>
+        </mat-form-field>
+
+        <div class="button-row">
+            <button mat-flat-button color="warn" (click)="goToList()" >Cancelar</button>
+            <button mat-flat-button style="float:right" (click)="createProduct()" color="primary">Cadastrar</button>
+        </div>
+    </form>
+</div>
