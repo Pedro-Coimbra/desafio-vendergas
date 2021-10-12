@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = new User();
+        this.appComponent.logged = false
     }
 
     // NOTE: Redireciona o usuário a página de cadastro

@@ -54,8 +54,15 @@
      justify-content: center;
      border-radius: 5px;
      align-items: center;
+     flex-direction: column;
  }
 
+ .header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
  /* .logo {
      background-size: auto 28px;
      width: 129px;

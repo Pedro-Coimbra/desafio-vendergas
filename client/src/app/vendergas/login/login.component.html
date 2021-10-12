@@ -1,13 +1,19 @@
 <div id="" class="contentContainerBordered">
-    <!-- <header>
+    <header>
 
         <img height="50" src="../../../assets/logo.c037bd80.svg" class="logo">
-    </header> -->
+    </header>
     <br>
     <form #loginForm="ngForm" class="form">
+        <header class="header">
+            <h1>
+                Login
+            </h1>
+        </header>
+        <br>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>E-mail</mat-label>
-            <input matInput type="email" name="email" [(ngModel)]="user.email" #email="ngModel"
+            <input matInput type="email" name="email" maxlength="100" [(ngModel)]="user.email" #email="ngModel"
             placeholder="Digite o seu E-mail" value="" required>
             <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
                 <div [hidden]="!email.errors.required">
@@ -18,7 +24,7 @@
 
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Senha</mat-label>
-            <input matInput type="password" name="senha" [(ngModel)]="user.senha" #senha="ngModel"
+            <input matInput type="password" name="senha" maxlength="100" [(ngModel)]="user.senha" #senha="ngModel"
             placeholder="Digite a sua senha" value="" required>
             <div *ngIf="senha.errors && (senha.dirty || senha.touched)" class="alert alert-danger">
                 <div [hidden]="!senha.errors.required">
