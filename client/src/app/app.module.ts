@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgxMaskModule.forRoot({dropSpecialCharacters:false})
   ],
   providers: [],
   bootstrap: [AppComponent]

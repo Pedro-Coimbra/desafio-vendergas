@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CdkStepperModule } from '@angular/cdk/stepper';
-
+import { NgxMaskModule } from 'ngx-mask'
 import { ApiServices, UserService } from "./services";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
@@ -68,7 +68,8 @@ import { EditOrderComponent } from './edit-order/edit-order.component';
         MatIconModule,
         MatSelectModule,
         MatStepperModule,
-        CdkStepperModule
+        CdkStepperModule,
+        NgxMaskModule.forChild()
     ],
     providers: [
         UserService,

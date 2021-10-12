@@ -31,7 +31,7 @@
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Telefone</mat-label>
             <input matInput type="text" name="telefone" [(ngModel)]="client.telefone" #telefone="ngModel"
-                placeholder="Digite o telefone do seu cliente" value="" required>
+                placeholder="Digite o telefone do seu cliente" value="" mask="(00) 00000-0000" required>
             <div *ngIf="telefone.errors && (telefone.dirty || telefone.touched)" class="alert alert-danger">
                 <div [hidden]="!telefone.errors.required">
                     Esse campo é obrigatório!

@@ -34,7 +34,7 @@
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>CNPJ</mat-label>
             <input matInput type="text" name="cnpj" [(ngModel)]="company.cnpj" #cnpj="ngModel"
-                placeholder="Digite o CNPJ da sua empresa" value="" required>
+                placeholder="Digite o CNPJ da sua empresa" value=""  mask="00.000.000/0000-00" required>
             <div *ngIf="cnpj.errors && (cnpj.dirty || cnpj.touched)" class="alert alert-danger">
                 <div [hidden]="!cnpj.errors.required">
                     Esse campo é obrigatório!
