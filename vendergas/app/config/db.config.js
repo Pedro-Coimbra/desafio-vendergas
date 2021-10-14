@@ -1,8 +1,8 @@
 // NOTE: Credenciais do banco de dados
 module.exports = {
-    HOST: "localhost",
+    HOST: "postgres_container",
     USER: "postgres",
-    PASSWORD: "",
+    PASSWORD: "123456",
     DB: "postgres",
     dialect: "postgres",
     pool: {

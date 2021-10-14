@@ -12,6 +12,8 @@
     "express": "~4.16.1",
     "express-session": "^1.17.2",
     "http-errors": "~1.6.3",
+    "sequelize": "^6.6.5",
+    "bcrypt": "^5.0.1",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
