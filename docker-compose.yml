@@ -11,9 +11,28 @@ services:
       - 4200:4200
   vendergas:
     image: vendergas/desafio-backend:latest
-    network_mode: host
     build:
       context: vendergas
       dockerfile: ./Dockerfile
     ports:
       - 3000:3000
+    networks:
+      - vendergas-network
+    restart: unless-stopped
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "123456"
+    ports:
+      - "5432:5432"
+    networks:
+      - vendergas-network
+    restart: unless-stopped
+    depends_on:
+      - vendergas
+
+networks: 
+  vendergas-network:
+    driver: bridge
